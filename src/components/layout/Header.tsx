@@ -11,6 +11,7 @@ export default function Header() {
   const pathname = usePathname();
 
   return (
+    <>
     <header className="fixed top-0 left-0 right-0 z-50 bg-deep/90 backdrop-blur-sm border-b border-gold/10">
       <nav className="max-w-6xl mx-auto flex items-center justify-between px-6 py-4">
         <Link href="/" className="shrink-0" onClick={() => setMenuOpen(false)}>
@@ -66,23 +67,28 @@ export default function Header() {
         </button>
       </nav>
 
-      {/* Mobile overlay */}
-      {menuOpen && (
-        <div className="md:hidden fixed inset-0 top-[73px] bg-deep/98 backdrop-blur-md flex flex-col items-center justify-center gap-10">
-          {NAV_ITEMS.map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              onClick={() => setMenuOpen(false)}
-              className={`font-heading text-display-sm transition-colors ${
-                pathname === item.href ? "text-gold" : "text-cream/70 hover:text-cream"
-              }`}
-            >
-              {item.label}
-            </Link>
-          ))}
-        </div>
-      )}
     </header>
+
+    {/* Mobile overlay — rendered outside header to avoid stacking context issues */}
+    {menuOpen && (
+      <div
+        className="md:hidden fixed inset-0 z-[60] flex flex-col items-center justify-center gap-10"
+        style={{ backgroundColor: "#0B0B0F", top: "97px" }}
+      >
+        {NAV_ITEMS.map((item) => (
+          <Link
+            key={item.href}
+            href={item.href}
+            onClick={() => setMenuOpen(false)}
+            className={`font-heading text-display-sm transition-colors ${
+              pathname === item.href ? "text-gold" : "text-cream/70 hover:text-cream"
+            }`}
+          >
+            {item.label}
+          </Link>
+        ))}
+      </div>
+    )}
+    </>
   );
 }
