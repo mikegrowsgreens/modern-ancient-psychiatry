@@ -45,7 +45,7 @@ export default function AboutPage() {
                 src="/images/brittany-headshot.jpg"
                 alt="Brittany Khoury"
                 fill
-                className="object-cover"
+                className="object-cover object-top"
                 sizes="256px"
               />
             </div>

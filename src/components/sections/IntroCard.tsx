@@ -13,7 +13,7 @@ export default function IntroCard() {
               src="/images/brittany-headshot.jpg"
               alt="Brittany Khoury, PMHNP-BC"
               fill
-              className="object-cover"
+              className="object-cover object-top"
               sizes="(max-width: 768px) 256px, 288px"
             />
           </div>
