@@ -38,6 +38,9 @@ Thumbs.db
 *.swp
 *.swo
 
+# playwright mcp artifacts
+.playwright-mcp/
+
 # claude / local agent state
 .claude/settings.local.json
 .claude/.local/

@@ -1,31 +1,19 @@
-# Project: {{PROJECT_NAME}}
+# Project: Modern Ancient Psychiatry (MAP) Website
 
 > Extends `~/.claude/CLAUDE.md`. Project-specific overrides only.
 
 ## Stakes tier
 
-Pick one — drives plan-mode, gauntlet, and pipeline behavior:
-
-- [ ] **Vibe** (toy, personal, < 1 week, no external users)
-- [ ] **Real** (will have users, 1–4 weeks)
-- [ ] **High-stakes** (money, customer data, production)
+- [x] **Vibe** (personal favor for a friend, hosted on MGG)
 
 ## Stack
 
-{{describe stack — Next.js? n8n? script? Defaults to MGG: Next.js + Postgres + Tailwind + n8n}}
+Next.js 14 + Tailwind v4 + n8n webhook for contact form. Deployed on MGG (DigitalOcean).
 
 ## Repo conventions
 
 - Branch prefix: `mike/`
-- {{PR or direct push — match the global rule based on which org owns this repo}}
-
-## Domain glossary
-
-{{terms that matter. Delete this section if there aren't any.}}
-
-## Open questions
-
-{{stuff still being decided. Move to docs/ when resolved.}}
+- Direct push to main (personal repo)
 
 ## What to read on session start
 
