@@ -9,21 +9,24 @@ export default function Hero() {
           className="absolute inset-0 animate-ken-burns bg-cover bg-center"
           style={{ backgroundImage: "url(/images/hero-sunflower.jpg)" }}
         />
-        <div className="absolute inset-0 bg-deep/50" />
+        <div className="absolute inset-0 bg-deep/40" />
       </div>
 
-      {/* Content */}
-      <div className="relative z-10 text-center px-6 max-w-3xl">
-        <h1 className="font-heading text-display md:text-[4.5rem] font-light text-cream mb-6 whitespace-pre-line">
-          {HERO.title}
-        </h1>
-        <div className="gold-divider mb-6" />
-        <p className="font-heading text-subheading md:text-heading text-gold italic font-light mb-4">
-          {HERO.subtitle}
-        </p>
-        <p className="font-heading text-body-lg text-cream/70 italic font-light">
-          {HERO.tagline}
-        </p>
+      {/* Frosted glass circle */}
+      <div className="relative z-10 flex items-center justify-center">
+        <div className="w-[420px] h-[420px] md:w-[520px] md:h-[520px] rounded-full bg-cream/15 backdrop-blur-md border border-cream/10 flex items-center justify-center">
+          <div className="text-center px-10 max-w-md">
+            <h1 className="font-heading text-display md:text-[4rem] font-light text-cream mb-4 whitespace-pre-line">
+              {HERO.title}
+            </h1>
+            <p className="font-heading text-subheading md:text-heading text-gold italic font-light mb-3">
+              {HERO.subtitle}
+            </p>
+            <p className="font-heading text-body text-cream/70 italic font-light">
+              {HERO.tagline}
+            </p>
+          </div>
+        </div>
       </div>
 
       {/* Subtle scroll indicator */}
