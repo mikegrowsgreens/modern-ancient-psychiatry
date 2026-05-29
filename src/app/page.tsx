@@ -1,5 +1,6 @@
 import Hero from "@/components/sections/Hero";
 import Philosophy from "@/components/sections/Philosophy";
+import VideoSection from "@/components/sections/VideoSection";
 import IntroCard from "@/components/sections/IntroCard";
 import WhyDifferent from "@/components/sections/WhyDifferent";
 import FAQ from "@/components/sections/FAQ";
@@ -12,6 +13,7 @@ export default function Home() {
       <Hero />
       <EmergencyBanner />
       <Philosophy />
+      <VideoSection />
       <IntroCard />
       <WhyDifferent />
       <FAQ />

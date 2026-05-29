@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import { CONTACT, EMERGENCY_DISCLAIMER } from "@/content/shared";
+import { CONTACT, EMERGENCY_DISCLAIMER, SOCIAL_LINKS } from "@/content/shared";
 import { CONTACT_HEADING, CONTACT_INTRO } from "@/content/contact";
 import ContactForm from "@/components/ui/ContactForm";
 
@@ -15,7 +15,7 @@ export default function ContactPage() {
       <section className="relative h-[40vh] min-h-[300px] flex items-end overflow-hidden">
         <div className="absolute inset-0">
           <Image
-            src="/images/calm-water.jpg"
+            src="/images/calm-black-water.jpg"
             alt=""
             fill
             className="object-cover"
@@ -75,7 +75,37 @@ export default function ContactPage() {
                 </h3>
                 <p className="text-muted">{CONTACT.location}</p>
               </div>
+
+              <div>
+                <h3 className="font-heading text-body text-gold mb-1">
+                  Follow
+                </h3>
+                <div className="flex gap-4">
+                  {SOCIAL_LINKS.map((link) => (
+                    <a
+                      key={link.label}
+                      href={link.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={link.label}
+                      className="opacity-70 hover:opacity-100 transition-opacity"
+                    >
+                      <Image
+                        src={link.icon}
+                        alt={link.label}
+                        width={28}
+                        height={28}
+                        className="invert"
+                      />
+                    </a>
+                  ))}
+                </div>
+              </div>
             </div>
+
+            <p className="text-body-sm text-muted/60 italic mt-6">
+              Please do not include sensitive personal or medical information via email
+            </p>
           </div>
 
           {/* Right: form */}

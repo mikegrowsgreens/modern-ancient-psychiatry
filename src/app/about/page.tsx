@@ -21,7 +21,7 @@ export default function AboutPage() {
       <section className="relative h-[50vh] min-h-[360px] flex items-end overflow-hidden">
         <div className="absolute inset-0">
           <Image
-            src="/images/singing-bowls.jpg"
+            src="/images/singing-bowls-hero.jpg"
             alt=""
             fill
             className="object-cover"
@@ -42,7 +42,7 @@ export default function AboutPage() {
           <FadeIn className="flex justify-center md:justify-start">
             <div className="relative w-64 h-64 rounded-full overflow-hidden border-2 border-gold/20">
               <Image
-                src="/images/brittany-headshot.jpg"
+                src="/images/final-07.jpg"
                 alt="Brittany Khoury"
                 fill
                 className="object-cover object-top"
@@ -81,7 +81,7 @@ export default function AboutPage() {
             <div className="grid grid-cols-2 gap-3">
               <div className="relative aspect-[3/4] rounded-sm overflow-hidden">
                 <Image
-                  src="/images/nature-1.jpg"
+                  src="/images/about-circle-1.jpeg"
                   alt="Brittany in nature"
                   fill
                   className="object-cover"
@@ -90,7 +90,7 @@ export default function AboutPage() {
               </div>
               <div className="relative aspect-[3/4] rounded-sm overflow-hidden mt-6">
                 <Image
-                  src="/images/nature-2.jpg"
+                  src="/images/about-circle-2.jpeg"
                   alt="Outdoors"
                   fill
                   className="object-cover"
@@ -119,7 +119,7 @@ export default function AboutPage() {
           <FadeIn delay={400}>
             <div className="relative w-full max-w-md mx-auto aspect-[4/3] rounded-sm overflow-hidden">
               <Image
-                src="/images/meditation.jpg"
+                src="/images/IMG_0991.jpeg"
                 alt="Meditation practice"
                 fill
                 className="object-cover"
@@ -149,7 +149,7 @@ export default function AboutPage() {
             <div className="grid grid-cols-2 gap-4 mt-12 max-w-2xl mx-auto">
               <div className="relative aspect-[3/4] rounded-sm overflow-hidden">
                 <Image
-                  src="/images/approach-1.jpg"
+                  src="/images/IMG_4167.jpeg"
                   alt=""
                   fill
                   className="object-cover"
@@ -158,7 +158,7 @@ export default function AboutPage() {
               </div>
               <div className="relative aspect-[3/4] rounded-sm overflow-hidden">
                 <Image
-                  src="/images/approach-2.jpg"
+                  src="/images/IMG_6057.jpeg"
                   alt=""
                   fill
                   className="object-cover"

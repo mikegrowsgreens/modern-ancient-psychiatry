@@ -24,7 +24,7 @@ export default function ServicesPage() {
       <section className="relative h-[45vh] min-h-[320px] flex items-end overflow-hidden">
         <div className="absolute inset-0">
           <Image
-            src="/images/butterfly.jpg"
+            src="/images/butterfly-on-flowers.jpg"
             alt=""
             fill
             className="object-cover"

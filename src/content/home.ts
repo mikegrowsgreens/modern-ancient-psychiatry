@@ -74,6 +74,14 @@ export const FAQ = [
   },
 ] as const;
 
+export const VIDEO = {
+  // Set to a YouTube or Vimeo embed URL when ready, e.g.:
+  // url: "https://www.youtube.com/embed/VIDEO_ID"
+  url: null as string | null,
+  placeholderImage: "/images/IMG_4167.jpeg",
+  placeholderText: "Video coming soon",
+} as const;
+
 export const BOOKING_CTA = {
   pretext:
     "I work with adults seeking a deeper, more intentional approach to mental health care.",

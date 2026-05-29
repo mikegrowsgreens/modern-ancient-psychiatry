@@ -7,7 +7,7 @@ export default function Hero() {
       <div className="absolute inset-0">
         <div
           className="absolute inset-0 animate-ken-burns bg-cover bg-center"
-          style={{ backgroundImage: "url(/images/hero-sunflower.jpg)" }}
+          style={{ backgroundImage: "url(/images/sunflower-hero.jpg)" }}
         />
         <div className="absolute inset-0 bg-deep/40" />
       </div>

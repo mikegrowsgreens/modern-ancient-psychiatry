@@ -16,10 +16,10 @@ export default function Header() {
       <nav className="max-w-6xl mx-auto flex items-center justify-between px-6 py-4">
         <Link href="/" className="shrink-0" onClick={() => setMenuOpen(false)}>
           <Image
-            src="/images/logo.png"
+            src="/images/logo-trimmed-nobg.png"
             alt="Modern Ancient Psychiatry"
-            width={200}
-            height={200}
+            width={400}
+            height={209}
             className="opacity-90 hover:opacity-100 transition-opacity h-14 md:h-20 w-auto"
             priority
           />
@@ -41,6 +41,14 @@ export default function Header() {
               </Link>
             </li>
           ))}
+          <li>
+            <Link
+              href="/contact"
+              className="font-heading text-body-sm tracking-wide bg-gold text-deep px-5 py-2 rounded-sm hover:bg-gold/90 transition-colors"
+            >
+              Book a Consultation
+            </Link>
+          </li>
         </ul>
 
         {/* Mobile hamburger */}

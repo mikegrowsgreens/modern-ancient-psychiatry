@@ -16,6 +16,19 @@ export const CONTACT = {
   location: "Virtual in Arizona",
 } as const;
 
+export const SOCIAL_LINKS = [
+  {
+    label: "Facebook",
+    href: "#", // Replace with Brittany's actual URL
+    icon: "/images/facebook-social.png",
+  },
+  {
+    label: "Instagram",
+    href: "#", // Replace with Brittany's actual URL
+    icon: "/images/instagram-social.png",
+  },
+] as const;
+
 export const FOOTER_TAGLINE =
   "Psychiatry rooted in science, guided by presence, and grounded in compassion.";
 

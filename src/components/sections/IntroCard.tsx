@@ -10,7 +10,7 @@ export default function IntroCard() {
         <FadeIn className="flex justify-center md:justify-start">
           <div className="relative w-64 h-64 md:w-72 md:h-72 rounded-full overflow-hidden border-2 border-gold/20">
             <Image
-              src="/images/brittany-headshot.jpg"
+              src="/images/final-07.jpg"
               alt="Brittany Khoury, PMHNP-BC"
               fill
               className="object-cover object-top"

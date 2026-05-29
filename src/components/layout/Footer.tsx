@@ -3,6 +3,7 @@ import Image from "next/image";
 import {
   NAV_ITEMS,
   CONTACT,
+  SOCIAL_LINKS,
   FOOTER_TAGLINE,
   FOOTER_LEGAL,
 } from "@/content/shared";
@@ -15,15 +16,34 @@ export default function Footer() {
           {/* Logo + tagline */}
           <div>
             <Image
-              src="/images/logo.png"
+              src="/images/logo-trimmed-nobg.png"
               alt="Modern Ancient Psychiatry"
-              width={100}
-              height={100}
-              className="mb-4 h-16 w-auto"
+              width={400}
+              height={209}
+              className="mb-4 h-16 w-auto brightness-0"
             />
             <p className="text-body-sm text-deep/70 italic font-heading">
               {FOOTER_TAGLINE}
             </p>
+            <div className="flex gap-3 mt-4">
+              {SOCIAL_LINKS.map((link) => (
+                <a
+                  key={link.label}
+                  href={link.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={link.label}
+                  className="opacity-60 hover:opacity-100 transition-opacity"
+                >
+                  <Image
+                    src={link.icon}
+                    alt={link.label}
+                    width={24}
+                    height={24}
+                  />
+                </a>
+              ))}
+            </div>
           </div>
 
           {/* Navigation */}
