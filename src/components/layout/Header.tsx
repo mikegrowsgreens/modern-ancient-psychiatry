@@ -20,7 +20,7 @@ export default function Header() {
             alt="Modern Ancient Psychiatry"
             width={200}
             height={200}
-            className="opacity-90 hover:opacity-100 transition-opacity h-16 md:h-18 w-auto rounded-sm"
+            className="opacity-90 hover:opacity-100 transition-opacity h-14 md:h-20 w-auto"
             priority
           />
         </Link>
@@ -73,7 +73,7 @@ export default function Header() {
     {menuOpen && (
       <div
         className="md:hidden fixed inset-0 z-[60] flex flex-col items-center justify-center gap-10"
-        style={{ backgroundColor: "#0B0B0F", top: "97px" }}
+        style={{ backgroundColor: "#0B0B0F", top: "89px" }}
       >
         {NAV_ITEMS.map((item) => (
           <Link
