@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Modern Ancient Psychiatry | Mike Paulus</title>
+<meta name="description" content="Custom-designed website for an integrative psychiatric practice. 4 pages, content-driven architecture, Ken Burns hero, n8n webhook contact form. Built and deployed solo.">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Sora:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#070b0a;--bg2:#0c110f;--card:#111916;--card-h:#162019;
+  --g:#3ddc84;--gs:#6ecf97;--gd:rgba(61,220,132,0.08);--gm:rgba(61,220,132,0.14);--gg:rgba(61,220,132,0.2);--gb:rgba(61,220,132,0.12);
+  --b:#5b9cf5;--bd:rgba(91,156,245,0.08);--bb:rgba(91,156,245,0.12);
+  --p:#a78bfa;--pd:rgba(167,139,250,0.08);--pb:rgba(167,139,250,0.12);
+  --o:#ff8c42;--od:rgba(255,140,66,0.08);
+  --gold:#C9A84C;--goldd:rgba(201,168,76,0.08);--goldb:rgba(201,168,76,0.12);
+  --w:#e6efe9;--gr:#8a9e90;--m:#506058;--br:rgba(255,255,255,0.04);
+  --f:'Sora',sans-serif;--mo:'DM Mono',monospace;
+}
+html{scroll-behavior:smooth;background:var(--bg);color:var(--w);font-family:var(--f);line-height:1.6;overflow-x:hidden}
+body{background:var(--bg);overflow-x:hidden}
+body::after{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(61,220,132,0.013) 1px,transparent 1px),linear-gradient(90deg,rgba(61,220,132,0.013) 1px,transparent 1px);background-size:72px 72px;pointer-events:none;z-index:0}
+img{max-width:100%;height:auto;display:block}
+a{color:var(--g);text-decoration:none;transition:color 0.2s}
+a:hover{color:var(--w)}
+
+.w{max-width:900px;margin:0 auto;padding:0 24px;position:relative;z-index:1}
+.r{opacity:0;transform:translateY(20px);transition:opacity 0.6s ease,transform 0.6s ease}
+.r.v{opacity:1;transform:translateY(0)}
+.d1{transition-delay:.07s}.d2{transition-delay:.14s}.d3{transition-delay:.21s}.d4{transition-delay:.28s}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:14px 24px;background:rgba(7,11,10,0.9);backdrop-filter:blur(24px);border-bottom:1px solid var(--br)}
+.ni{max-width:900px;margin:0 auto;display:flex;align-items:center;justify-content:space-between}
+.nl{font-family:var(--mo);font-size:13px;font-weight:500;color:var(--g);text-decoration:none;letter-spacing:0.5px}
+.nl span{color:var(--m);font-weight:400}
+.nb{background:var(--g);color:var(--bg);padding:8px 18px;border-radius:8px;font-weight:600;font-size:13px;text-decoration:none;transition:all 0.2s}
+.nb:hover{box-shadow:0 0 24px var(--gg);transform:translateY(-1px)}
+
+/* HERO */
+.hero{padding:120px 0 60px;text-align:center}
+.badge{display:inline-flex;align-items:center;gap:6px;font-family:var(--mo);font-size:10px;padding:6px 14px;border-radius:6px;background:var(--goldd);color:var(--gold);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:24px}
+.badge::before{content:'';width:5px;height:5px;background:var(--gold);border-radius:50%}
+h1{font-size:clamp(2rem,5vw,3.2rem);font-weight:800;letter-spacing:-1.5px;line-height:1.1;margin-bottom:16px}
+h1 .accent{color:var(--gold)}
+.sub{font-size:16px;color:var(--gr);max-width:600px;margin:0 auto 28px;line-height:1.65}
+.meta{display:flex;gap:24px;justify-content:center;flex-wrap:wrap;margin-bottom:0}
+.meta-item{font-family:var(--mo);font-size:11px;color:var(--m);text-transform:uppercase;letter-spacing:1px;display:flex;align-items:center;gap:6px}
+.meta-item strong{color:var(--gr);font-weight:500}
+
+/* SECTIONS */
+.section{padding:48px 0}
+.sl{font-family:var(--mo);font-size:11px;color:var(--g);text-transform:uppercase;letter-spacing:3px;margin-bottom:14px;display:flex;align-items:center;gap:10px}
+.sl::before{content:'';width:20px;height:1px;background:var(--g)}
+.st{font-size:clamp(1.4rem,3vw,2rem);font-weight:700;letter-spacing:-0.5px;margin-bottom:16px;line-height:1.2}
+.sp{color:var(--gr);font-size:15px;line-height:1.7;margin-bottom:24px}
+
+/* CARDS */
+.card{background:var(--card);border:1px solid var(--br);border-radius:14px;overflow:hidden;transition:border-color 0.3s}
+.card:hover{border-color:var(--gm)}
+.card-img{background:var(--bg2);border-bottom:1px solid var(--br);cursor:pointer;position:relative}
+.card-img::after{content:'View';position:absolute;bottom:8px;right:8px;font-family:var(--mo);font-size:9px;padding:3px 8px;border-radius:4px;background:rgba(0,0,0,0.7);color:var(--gr);text-transform:uppercase;letter-spacing:1px;opacity:0;transition:opacity 0.2s}
+.card-img:hover::after{opacity:1}
+.card-img img{width:100%}
+.card-body{padding:20px}
+.card-body h3{font-size:16px;font-weight:700;margin-bottom:6px}
+.card-body p{font-size:13px;color:var(--gr);line-height:1.6}
+.card-tag{display:inline-flex;align-items:center;gap:4px;font-family:var(--mo);font-size:9px;padding:3px 8px;border-radius:4px;text-transform:uppercase;letter-spacing:0.5px;margin-top:10px}
+.tag-fe{background:var(--bd);color:var(--b)}
+.tag-be{background:var(--gd);color:var(--g)}
+.tag-ux{background:var(--pd);color:var(--p)}
+.tag-design{background:var(--goldd);color:var(--gold)}
+
+/* GRID */
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media(max-width:700px){.grid-2{grid-template-columns:1fr}}
+
+/* STATS */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:32px}
+@media(max-width:600px){.stats{grid-template-columns:repeat(2,1fr)}}
+.stat{background:var(--card);border:1px solid var(--br);border-radius:10px;padding:16px;text-align:center}
+.stat-n{font-size:clamp(1.6rem,3vw,2.2rem);font-weight:800;color:var(--gold);letter-spacing:-1px}
+.stat-l{font-family:var(--mo);font-size:10px;color:var(--m);text-transform:uppercase;letter-spacing:1px;margin-top:4px}
+
+/* ARCH */
+.arch{background:var(--card);border:1px solid var(--br);border-radius:14px;padding:28px;font-family:var(--mo);font-size:12px;color:var(--gr);line-height:2;overflow-x:auto;white-space:pre;margin-bottom:24px}
+.arch .hl{color:var(--g)}
+.arch .hl2{color:var(--p)}
+.arch .hl3{color:var(--gold)}
+
+/* DETAIL LIST */
+.detail{margin-bottom:20px}
+.detail h4{font-size:14px;font-weight:600;margin-bottom:6px;color:var(--w)}
+.detail p{font-size:13px;color:var(--gr);line-height:1.65}
+.detail ul{list-style:none;padding:0}
+.detail ul li{font-size:13px;color:var(--gr);line-height:1.65;padding-left:16px;position:relative}
+.detail ul li::before{content:'';position:absolute;left:0;top:9px;width:5px;height:5px;border-radius:50%;background:var(--gold)}
+
+/* STACK PILLS */
+.stack{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:24px}
+.pill{font-family:var(--mo);font-size:10px;padding:5px 12px;border-radius:6px;background:var(--gd);color:var(--g);text-transform:uppercase;letter-spacing:0.5px}
+
+/* MOBILE PAIR */
+.desktop-mobile-pair{display:grid;grid-template-columns:2fr 1fr;gap:24px;align-items:start;margin-bottom:24px}
+@media(max-width:700px){.desktop-mobile-pair{grid-template-columns:1fr}}
+.mobile-frame{background:var(--card);border:1px solid var(--br);border-radius:20px;padding:8px;max-width:320px;margin:0 auto}
+.mobile-frame img{border-radius:14px}
+.mobile-label{text-align:center;font-family:var(--mo);font-size:10px;color:var(--m);text-transform:uppercase;letter-spacing:1px;margin-top:10px}
+.desktop-frame{background:var(--card);border:1px solid var(--br);border-radius:14px;padding:6px;overflow:hidden}
+.desktop-frame img{border-radius:10px}
+
+/* COLOR SWATCH */
+.swatches{display:flex;gap:10px;flex-wrap:wrap;margin:16px 0 24px}
+.swatch{display:flex;align-items:center;gap:8px;background:var(--card);border:1px solid var(--br);border-radius:8px;padding:6px 12px 6px 6px}
+.swatch-dot{width:24px;height:24px;border-radius:6px;flex-shrink:0}
+.swatch-label{font-family:var(--mo);font-size:10px;color:var(--gr);text-transform:uppercase;letter-spacing:0.5px}
+
+/* SEPARATOR */
+hr{border:none;height:1px;background:var(--br);margin:48px 0}
+
+/* FOOTER */
+footer{padding:48px 0;text-align:center;border-top:1px solid var(--br)}
+footer p{font-family:var(--mo);font-size:11px;color:var(--m);letter-spacing:0.5px}
+footer a{color:var(--g)}
+
+/* LIGHTBOX */
+.lightbox{display:none;position:fixed;inset:0;z-index:200;background:rgba(0,0,0,0.92);backdrop-filter:blur(12px);align-items:center;justify-content:center;padding:24px;cursor:zoom-out}
+.lightbox.active{display:flex}
+.lightbox img{max-width:95vw;max-height:92vh;border-radius:8px;box-shadow:0 20px 60px rgba(0,0,0,0.5)}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="ni">
+    <a href="/" class="nl">mike_paulus <span>/ portfolio / modern-ancient-psychiatry</span></a>
+    <a href="/" class="nb">Back to Home</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="w">
+    <div class="badge r">Freelance</div>
+    <h1 class="r d1">A psychiatrist needed a website. <span class="accent">I built the whole thing.</span></h1>
+    <p class="sub r d2">Custom-designed 4-page site for an integrative psychiatric practice in Arizona. Brand identity, content architecture, contact form automation, production deploy. From blank repo to live patients in under a week.</p>
+    <div class="meta r d3">
+      <span class="meta-item"><strong>Role</strong> Designer + Developer</span>
+      <span class="meta-item"><strong>Client</strong> Modern Ancient Psychiatry</span>
+      <span class="meta-item"><strong>Timeline</strong> ~1 week</span>
+      <span class="meta-item"><strong>Scope</strong> 4 pages, full deploy</span>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<section class="section">
+  <div class="w">
+    <div class="stats r">
+      <div class="stat">
+        <div class="stat-n">4</div>
+        <div class="stat-l">Pages</div>
+      </div>
+      <div class="stat">
+        <div class="stat-n">20+</div>
+        <div class="stat-l">Sections</div>
+      </div>
+      <div class="stat">
+        <div class="stat-n">$0</div>
+        <div class="stat-l">Platform Fees</div>
+      </div>
+      <div class="stat">
+        <div class="stat-n">7</div>
+        <div class="stat-l">Services Listed</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROBLEM -->
+<section class="section">
+  <div class="w">
+    <div class="sl r">The Problem</div>
+    <h2 class="st r d1">Solo practitioner. No web presence. Patients can't find her.</h2>
+    <p class="sp r d2">A board-certified Psychiatric Mental Health Nurse Practitioner was launching her solo integrative psychiatry practice in Arizona. She needed a professional web presence before opening to patients &mdash; something that communicated clinical credibility while feeling warm, intentional, and approachable. No Squarespace template was going to capture that.</p>
+  </div>
+</section>
+
+<hr>
+
+<!-- HERO + DESIGN -->
+<section class="section">
+  <div class="w">
+    <div class="sl r">01 &mdash; Design System</div>
+    <h2 class="st r d1">A visual identity built from the practice's philosophy</h2>
+    <p class="sp r d2">The name "Modern Ancient Psychiatry" set the tone: clinical rigor paired with ancient healing wisdom. I designed a system that reads as calming, premium, and deeply human &mdash; not sterile.</p>
+
+    <div class="desktop-mobile-pair r d3">
+      <div>
+        <div class="desktop-frame" onclick="openLightbox(this)">
+          <img src="screenshots/home-hero.jpeg" alt="Home hero - desktop">
+        </div>
+        <div class="mobile-label">Desktop &mdash; Ken Burns hero with frosted glass overlay</div>
+      </div>
+      <div>
+        <div class="mobile-frame" onclick="openLightbox(this)">
+          <img src="screenshots/home-mobile.jpeg" alt="Home hero - mobile">
+        </div>
+        <div class="mobile-label">Mobile</div>
+      </div>
+    </div>
+
+    <div class="detail r d3">
+      <h4>Typography</h4>
+      <p>Cormorant Garamond (serif) for headings, Source Sans 3 (sans) for body. The pairing says "medical professional who cares about the human experience." Light weights throughout for an airy, unhurried feel.</p>
+    </div>
+    <div class="detail r d4">
+      <h4>Color Palette</h4>
+    </div>
+    <div class="swatches r d4">
+      <div class="swatch"><div class="swatch-dot" style="background:#0B0B0F"></div><span class="swatch-label">Deep #0B0B0F</span></div>
+      <div class="swatch"><div class="swatch-dot" style="background:#F2EDE4"></div><span class="swatch-label">Cream #F2EDE4</span></div>
+      <div class="swatch"><div class="swatch-dot" style="background:#C9A84C"></div><span class="swatch-label">Gold #C9A84C</span></div>
+      <div class="swatch"><div class="swatch-dot" style="background:#7A8B6F"></div><span class="swatch-label">Sage #7A8B6F</span></div>
+      <div class="swatch"><div class="swatch-dot" style="background:#1A1A1E"></div><span class="swatch-label">Surface #1A1A1E</span></div>
+    </div>
+    <div class="detail r d4">
+      <h4>Key Visual Decisions</h4>
+      <ul>
+        <li>Dark background feels calming and premium &mdash; not clinical white</li>
+        <li>Gold accents add warmth without being loud (dividers, headings, CTAs)</li>
+        <li>Hero uses a full-viewport Ken Burns animation (25s CSS keyframe) with frosted-glass circle overlay (<code style="color:var(--p);font-family:var(--mo);font-size:12px">backdrop-blur-md</code>)</li>
+        <li>All animations are additive &mdash; content always visible for SSR and no-JS compatibility</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<hr>
+
+<!-- PAGES -->
+<section class="section">
+  <div class="w">
+    <div class="sl r">02 &mdash; The Pages</div>
+    <h2 class="st r d1">Four pages that tell the full story of the practice</h2>
+    <p class="sp r d2">Home, About, Services, Contact. Each page has its own hero image, section rhythm, and content density. The home page alone has 7 sections. All copy lives in typed TypeScript data files &mdash; the client can update content without touching a component.</p>
+
+    <div class="grid-2 r d2">
+      <div class="card" onclick="openLightbox(this.querySelector('.card-img'))">
+        <div class="card-img"><img src="screenshots/home-hero.jpeg" alt="Home Page" loading="lazy"></div>
+        <div class="card-body">
+          <h3>Home</h3>
+          <p>Ken Burns hero, frosted glass overlay, philosophy triptych over decorative background, accordion FAQ, video placeholder, booking CTA. 7 sections.</p>
+          <span class="card-tag tag-fe">Frontend</span>
+          <span class="card-tag tag-design">Design</span>
+        </div>
+      </div>
+      <div class="card" onclick="openLightbox(this.querySelector('.card-img'))">
+        <div class="card-img"><img src="screenshots/about.jpeg" alt="About Page" loading="lazy"></div>
+        <div class="card-body">
+          <h3>About</h3>
+          <p>Circular portrait with gold border, multi-section narrative (bio, personal, meditation, approach), staggered image grids, blockquote mantra.</p>
+          <span class="card-tag tag-fe">Frontend</span>
+          <span class="card-tag tag-ux">Narrative</span>
+        </div>
+      </div>
+      <div class="card" onclick="openLightbox(this.querySelector('.card-img'))">
+        <div class="card-img"><img src="screenshots/services.jpeg" alt="Services Page" loading="lazy"></div>
+        <div class="card-body">
+          <h3>Services</h3>
+          <p>7 service cards in responsive grid (auto-centering last on odd count), structured fee schedule, 9 policy sections from typed data objects.</p>
+          <span class="card-tag tag-fe">Frontend</span>
+          <span class="card-tag tag-be">Data-Driven</span>
+        </div>
+      </div>
+      <div class="card" onclick="openLightbox(this.querySelector('.card-img'))">
+        <div class="card-img"><img src="screenshots/contact.jpeg" alt="Contact Page" loading="lazy"></div>
+        <div class="card-body">
+          <h3>Contact</h3>
+          <p>Two-column layout, social links with CSS-inverted icons, validated form that submits through API route to n8n webhook for email delivery.</p>
+          <span class="card-tag tag-fe">Frontend</span>
+          <span class="card-tag tag-be">API + Webhook</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr>
+
+<!-- CONTENT ARCHITECTURE -->
+<section class="section">
+  <div class="w">
+    <div class="sl r">03 &mdash; Content Architecture</div>
+    <h2 class="st r d1">Copy and code are completely separate</h2>
+    <p class="sp r d2">Every piece of text on the site &mdash; hero copy, service descriptions, fee schedules, policy sections, FAQ answers &mdash; lives in typed TypeScript data files. Components just render. This is the pattern that makes the site maintainable.</p>
+
+    <div class="arch r d2"><span class="hl">src/content/</span>          <span class="hl3">&larr; All copy lives here</span>
+  home.ts             Hero, philosophy, FAQ, video, CTA
+  about.ts            Bio, personal, meditation, approach
+  services.ts         7 services, fees, 9 policies (typed)
+  contact.ts          Contact page copy
+  shared.ts           Nav, footer, social links
+
+<span class="hl2">src/components/</span>       <span class="hl3">&larr; Purely presentational</span>
+  sections/           Hero, Philosophy, FAQ, BookingCTA...
+  ui/                 Button, Accordion, FadeIn, ServiceCard
+  layout/             Header, Footer, MobileBookingBar
+
+<span class="hl">src/app/</span>              <span class="hl3">&larr; Next.js App Router</span>
+  page.tsx            Home (composes 7 sections)
+  about/page.tsx      About
+  services/page.tsx   Services
+  contact/page.tsx    Contact
+  api/contact/        Form &rarr; n8n webhook</div>
+
+    <div class="detail r d3">
+      <h4>Why this matters</h4>
+      <ul>
+        <li>Client can update any text by editing a single .ts file &mdash; no component knowledge needed</li>
+        <li>Content is type-checked at build time &mdash; typos in field names caught before deploy</li>
+        <li>Services, fees, and policies are structured data, not hardcoded strings in JSX</li>
+        <li>Adding a new FAQ or service is adding one object to an array</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<hr>
+
+<!-- ARCHITECTURE -->
+<section class="section">
+  <div class="w">
+    <div class="sl r">Architecture</div>
+    <h2 class="st r d1">What runs under the hood</h2>
+
+    <div class="stack r d2">
+      <span class="pill">Next.js 14</span>
+      <span class="pill">TypeScript</span>
+      <span class="pill">Tailwind CSS 3.4</span>
+      <span class="pill">React 18</span>
+      <span class="pill">n8n</span>
+      <span class="pill">PM2</span>
+      <span class="pill">Caddy</span>
+      <span class="pill">DigitalOcean</span>
+    </div>
+
+    <div class="arch r d3"><span class="hl">Next.js 14</span> (App Router)
+  4 pages (SSR + client components)
+  1 API route (contact form &rarr; webhook)
+  <span class="hl2">Intersection Observer</span> fade-in animations
+  Per-page <span class="hl2">Metadata</span> API for SEO
+
+<span class="hl3">Design System</span> (Tailwind)
+  5 custom colors, 7 font sizes
+  Ken Burns (25s CSS keyframe)
+  Frosted glass (backdrop-blur)
+  Mobile-first responsive
+
+<span class="hl">Deployment</span>
+  DigitalOcean droplet
+  PM2 process manager (port 3007)
+  Caddy reverse proxy + auto HTTPS
+  Cloudflare DNS</div>
+  </div>
+</section>
+
+<hr>
+
+<!-- WHY IT MATTERS -->
+<section class="section">
+  <div class="w">
+    <div class="sl r">Why This Matters</div>
+    <h2 class="st r d1">End-to-end, one person</h2>
+
+    <div class="grid-2 r d2">
+      <div class="detail">
+        <h4>Design + development, no handoff</h4>
+        <p>No Figma file to implement. I designed the visual identity (typography, palette, layout, animations) and built the frontend in the same pass. Design decisions were made in code, not in a separate tool.</p>
+      </div>
+      <div class="detail">
+        <h4>Production, not a mockup</h4>
+        <p>This is a real website for a real business. It's indexed by Google, serves actual patients, and has been running in production since day one. Not a tutorial project.</p>
+      </div>
+      <div class="detail">
+        <h4>Content architecture for non-developers</h4>
+        <p>The client is a psychiatrist, not a developer. The content layer means she can update any text on the site by editing plain data files. No CMS cost, no Squarespace lock-in, no drag-and-drop limitations.</p>
+      </div>
+      <div class="detail">
+        <h4>AI-assisted development</h4>
+        <p>Built with Claude Code. I directed the design, content structure, and architecture. AI accelerated the implementation. This is how I work &mdash; not a novelty, a workflow.</p>
+      </div>
+    </div>
+
+    <div class="sl r" style="margin-top:32px">Design details that matter</div>
+    <div class="detail r d1">
+      <ul>
+        <li>FadeIn animations are purely additive &mdash; content is always visible even without JS</li>
+        <li>Logo background removed with ImageMagick; footer uses CSS <code style="color:var(--p);font-family:var(--mo);font-size:12px">brightness-0</code> filter for dark silhouette on gold</li>
+        <li>Philosophy section renders 3 statements over a decorative background frame &mdash; middle statement in accent purple italic</li>
+        <li>Emergency disclaimer banner on every page &mdash; required for mental health practices</li>
+        <li>Skip-to-content link, semantic HTML, ARIA labels, keyboard navigation throughout</li>
+        <li>Mobile booking bar persists at bottom of viewport &mdash; always one tap from contact</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<hr>
+
+<!-- FOOTER -->
+<footer>
+  <div class="w">
+    <p style="margin-bottom:8px"><a href="/">mikegrowsgreens.com</a> &mdash; <a href="https://linkedin.com/in/mapaulus">LinkedIn</a> &mdash; <a href="https://github.com/mikegrowsgreens">GitHub</a></p>
+    <p>Built by Mike Paulus &middot; Fort Collins, CO</p>
+  </div>
+</footer>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+  <img id="lb-img" src="" alt="Full screenshot">
+</div>
+
+<script>
+document.querySelectorAll('.hero .r').forEach(el => el.classList.add('v'));
+const obs = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('v'); obs.unobserve(e.target); }});
+}, { threshold: 0.1 });
+document.querySelectorAll('.r:not(.v)').forEach(el => obs.observe(el));
+
+function openLightbox(el) {
+  const img = el.querySelector ? el.querySelector('img') : null;
+  if (!img) return;
+  document.getElementById('lb-img').src = img.src;
+  document.getElementById('lightbox').classList.add('active');
+}
+function closeLightbox() {
+  document.getElementById('lightbox').classList.remove('active');
+}
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
+</script>
+
+</body>
+</html>

@@ -53,3 +53,9 @@ logs/
 *.pem
 *.key
 secrets/
+
+# local image originals — not shipped
+assets-source/
+
+# build artifact
+tsconfig.tsbuildinfo
