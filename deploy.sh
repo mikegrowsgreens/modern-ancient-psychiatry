@@ -42,13 +42,21 @@ echo "    payload: ${SIZE}MB"
 test "$SIZE" -lt 60 || { echo "FAIL: payload ${SIZE}MB too large"; exit 1; }
 
 echo "==> Ship"
-# --exclude sharp: it is a native binary. The one installed on the droplet is
-# linux-x64; ours is darwin-arm64 and would not run there. Excluding it also
-# stops --delete from wiping the server's copy.
-rsync -az --delete --exclude 'node_modules/sharp' deploy/ "$HOST:$TARGET/"
+# sharp is native. We build on macOS, so our tree carries darwin-arm64 binaries
+# that cannot run on the linux droplet.
+#
+# Excluding node_modules/sharp alone is NOT enough: sharp's actual binary lives
+# in node_modules/@img/sharp-<platform>. Shipping ours replaced the server's
+# @img/sharp-linux-x64 with @img/sharp-darwin-arm64, and Next fell back to
+# serving unoptimized originals. Both paths must be excluded.
+rsync -az --delete \
+  --exclude 'node_modules/sharp' \
+  --exclude 'node_modules/@img' \
+  deploy/ "$HOST:$TARGET/"
 
-echo "==> sharp (once, prebuilt — no compile, does not violate no-build-on-droplet)"
-ssh "$HOST" "cd $TARGET && [ -d node_modules/sharp ] || npm i sharp --omit=dev --no-audit --no-fund"
+echo "==> sharp (prebuilt, no compile — does not violate no-build-on-droplet)"
+# Verify the LINUX binary specifically, not just that sharp exists.
+ssh "$HOST" "cd $TARGET && ls node_modules/@img 2>/dev/null | grep -q 'sharp-linux' || npm i sharp --omit=dev --no-audit --no-fund"
 
 echo "==> Restart"
 ssh "$HOST" "cd $TARGET && (HOSTNAME=127.0.0.1 PORT=$PORT pm2 restart $PM2_NAME --update-env || HOSTNAME=127.0.0.1 PORT=$PORT pm2 start server.js --name $PM2_NAME) && pm2 save"
