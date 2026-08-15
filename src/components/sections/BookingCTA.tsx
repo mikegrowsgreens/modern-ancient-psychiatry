@@ -12,11 +12,25 @@ import { BOOKING_CTA_ID } from "@/lib/site";
  * a program cover is printed on stock, not drawn with a marker. `--deep` on
  * this field measures 5.8:1; `--gold` on it measures 1.5:1 and never appears.
  */
-export default function BookingCTA() {
+type Props = {
+  /**
+   * Set where the field follows a chapter break. §9 gives the chapter
+   * photograph `--rhythm-chapter: 0` on both sides — the photograph *is* the
+   * gap — so adding `open` above the field there would put 176px of empty
+   * canvas between the picture and the poster and undo the seam.
+   */
+  flush?: boolean;
+};
+
+export default function BookingCTA({ flush = false }: Props) {
   return (
     <section
       id={BOOKING_CTA_ID}
-      className="bg-gold-deep px-6 py-rhythm-open md:px-12 lg:px-[4.5rem]"
+      // `mt` is the `open` gap §10 requires above the field; `py` is the air
+      // inside it. Using padding for both would let the gold swallow the gap.
+      className={`bg-gold-deep px-6 py-rhythm-default md:px-12 lg:px-[4.5rem] ${
+        flush ? "" : "mt-rhythm-open"
+      }`}
     >
       <div className="mx-auto grid w-full max-w-index gap-14 lg:grid-cols-[1fr_20rem] lg:gap-20">
         <div>

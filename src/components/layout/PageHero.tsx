@@ -65,7 +65,9 @@ export default function PageHero({
       {/* The seam. One hairline, full width, doing all the structural work. */}
       <div className="h-px w-full bg-cream/[0.12]" />
 
-      <div className={`${GUTTERS} pb-rhythm-close pt-8`}>
+      {/* No bottom padding: the next section owns the gap, so a boundary is one
+          token and not a sum of two. */}
+      <div className={`${GUTTERS} pt-8`}>
         <div className="mx-auto max-w-index">
           <p className="text-label font-semibold uppercase text-muted">
             {imageLabel}

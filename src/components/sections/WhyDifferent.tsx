@@ -12,7 +12,7 @@ import { WHY_DIFFERENT } from "@/content/home";
  */
 export default function WhyDifferent() {
   return (
-    <section className="bg-deep px-6 py-rhythm-open md:px-12 lg:px-[4.5rem]">
+    <section className="bg-deep px-6 pt-rhythm-open md:px-12 lg:px-[4.5rem]">
       <div className="mx-auto w-full max-w-index">
         <h2 className="max-w-display font-heading text-display font-light text-cream">
           {WHY_DIFFERENT.heading}

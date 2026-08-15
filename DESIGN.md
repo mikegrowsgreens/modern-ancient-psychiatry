@@ -317,6 +317,21 @@ One `.section-padding` on everything is abolished. Vertical space is a signal ab
 
 Base unit `0.5rem` (8px); the steps are 5 / 9 / 14 / 22 units.
 
+### How the values are applied — top padding only
+
+**A section declares its top rhythm and nothing else.** No `py-*`, no `pb-*`. The gap at a boundary is the *lower* section's `pt`, so it is exactly one token.
+
+This is not a style preference; it is what makes the scale real. When every section carried its own top *and* bottom padding, adjacent paddings added and no reader ever saw a token: the measured boundaries were 152, 184, 248, 288, 352 — five accidental sums, none of them a value in the table above, one of them larger than `open`. A five-value scale that never renders any of its five values is not a scale.
+
+Two exceptions, both because a fill or a rule seals the box:
+
+- **Filled bands** (the emergency strip, the gold field) take `mt-*` for the gap and keep `py-*` for their internal air. Padding on a filled element is inside the fill, so it cannot also be the gap.
+- **The footer** is sealed by its `border-t`, so it takes `mt-*` for the gap and keeps its own `py-*` below the rule.
+
+Everything else — including `PageHero`'s title block — ends with no bottom padding at all.
+
+**Verify it numerically, not by eye.** Walk `main > *` plus the footer, and for each boundary compute `max(marginBottom, marginTop) + (prev sealed ? 0 : prev.paddingBottom) + (next sealed ? 0 : next.paddingTop)`. Every result must equal one of the five tokens. The site currently scores 44/44 across four routes at 1440 and 375.
+
 ### Rhythm rules (enforced in design review)
 
 1. **No page uses `default` more than twice before using one `hairline` and one `open`.** Three `default` gaps in a row is a metronome, and a metronome is the thing that makes a page feel like it is moving at you.
@@ -664,6 +679,18 @@ The `design-review` gate ran against the deployed build on 2026-08-15. Contrast,
 | Non-delivery unmounted the form and discarded what the reader had typed | Form stays mounted below the notice |
 | `FadeIn.tsx` survived as a dead file §11 said to delete | Deleted |
 | `rounded-sm` on the skip link and in `Button`'s base | Removed |
+
+### Second pass
+
+A second `design-review` ran against the fixed build and found what the first pass had listed but not acted on.
+
+| Finding | Resolution |
+|---|---|
+| **Section paddings compounded, so no boundary rendered a rhythm token.** 11 of 18 gaps measured 152/184/248/288/352 — including a 288px void mid-scroll on the home page, larger than `open` | Top-padding-only model (§7). 44/44 boundaries now land on a token |
+| The logo had no `sizes` and shipped a 640px file for a 92px mark — 7× oversampled on every page | `sizes` declared; 29KB → 5KB at 1440, 48KB → 17KB at 375 |
+| The About chapter plates still said `50vw` after being changed to stack full-width below `md`, so both rendered *undersized* at 375 | `(max-width: 767px) 100vw, 50vw`, plus `quality={60}` on the two heaviest, wordless images |
+| `IntroCard`'s `sizes` used `(max-width: 768px)` where Tailwind's `md` is `min-width: 768px` — the query and the layout disagreed at exactly 768 | `767` |
+| Forcing 44px onto the inline 911/988 links broke the sentence ("call 911 , go to") | Reverted; WCAG 2.5.8's inline exemption recorded in §15 |
 
 **Two review findings were wrong and are recorded so they are not "fixed" later:** the honeypot *is* hidden from assistive tech (`aria-hidden` sits on its wrapper, which hides descendants), and the form's status blocks *do* carry `role="status" aria-live="polite"` — they had been probed on the idle form, before either exists.
 

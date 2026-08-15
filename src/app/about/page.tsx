@@ -43,7 +43,7 @@ export default function AboutPage() {
           flush-left on the index grid, prose held to the prose measure. The
           home page's intro plate is square with a different photograph so this
           composition happens exactly once. */}
-      <section className={`bg-deep py-rhythm-default ${GUTTERS}`}>
+      <section className={`bg-deep pt-rhythm-default ${GUTTERS}`}>
         <div className="mx-auto grid w-full max-w-index gap-y-12 lg:grid-cols-[20rem_1fr] lg:gap-x-24">
           <div>
             <div className="relative h-80 w-80 max-w-full overflow-hidden rounded-full border border-gold">
@@ -76,7 +76,7 @@ export default function AboutPage() {
           photographs behind empty alt attributes. Now a real h2, described
           photographs, and the `mt-6` nudge grown into a deliberate staggered
           plate pair — each plate carrying a wall label beneath it. */}
-      <section className={`bg-deep py-rhythm-close ${GUTTERS}`}>
+      <section className={`bg-deep pt-rhythm-close ${GUTTERS}`}>
         <div className="mx-auto w-full max-w-index">
           <h2 className={HEADING}>{PERSONAL.heading}</h2>
 
@@ -117,7 +117,7 @@ export default function AboutPage() {
           prose measure. The sentence that was carrying the whole section is
           lifted out of its paragraph and set as a pull quote that breaks the
           left margin — every word of the original still reads, in her order. */}
-      <section className={`bg-deep py-rhythm-default ${GUTTERS}`}>
+      <section className={`bg-deep pt-rhythm-default ${GUTTERS}`}>
         <div className="mx-auto w-full max-w-index">
           <h2 className={HEADING}>{APPROACH.heading}</h2>
 
@@ -176,7 +176,8 @@ export default function AboutPage() {
         ))}
       </div>
 
-      <BookingCTA />
+      {/* Flush against the chapter break: the photograph is the gap. */}
+      <BookingCTA flush />
     </>
   );
 }

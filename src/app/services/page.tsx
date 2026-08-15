@@ -154,7 +154,7 @@ export default function ServicesPage() {
           Three principles, not three products. No fee, no box, no numeral in a
           fee column — the Philosophy band's treatment, because that is what
           these actually are. */}
-      <section className={`${GUTTER} py-rhythm-default`}>
+      <section className={`${GUTTER} pt-rhythm-default`}>
         <div className="mx-auto w-full max-w-index">
           <h2 className="font-heading text-display font-light text-cream">
             {MODALITIES_HEADING}
@@ -187,7 +187,7 @@ export default function ServicesPage() {
           hairline between each. Honest about its own weight, and it takes the
           visual mass off nine blocks that were carrying the same rhythm as the
           practitioner's own narrative. */}
-      <section className={`${GUTTER} pb-rhythm-open pt-rhythm-close`}>
+      <section className={`${GUTTER} pt-rhythm-close`}>
         <div className="mx-auto w-full max-w-index">
           <h2 className="font-heading text-display font-light text-cream">
             {POLICIES_HEADING}

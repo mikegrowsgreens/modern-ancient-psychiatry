@@ -14,7 +14,7 @@ import { INTRO } from "@/content/home";
  */
 export default function IntroCard() {
   return (
-    <section className="bg-deep px-6 py-rhythm-default md:px-12 lg:px-[4.5rem]">
+    <section className="bg-deep px-6 pt-rhythm-close md:px-12 lg:px-[4.5rem]">
       <div className="mx-auto grid w-full max-w-index gap-10 md:grid-cols-[18rem_1fr] md:gap-16">
         <figure className="m-0">
           <div className="relative aspect-square w-full border border-cream/[0.12]">

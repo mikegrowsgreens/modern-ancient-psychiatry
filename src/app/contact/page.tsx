@@ -48,7 +48,7 @@ export default function ContactPage() {
           could not tap them from. */}
       <EmergencyBanner />
 
-      <section className={`${GUTTER} pb-rhythm-open pt-rhythm-default`}>
+      <section className={`${GUTTER} pt-rhythm-default`}>
         <div className="mx-auto grid w-full max-w-index gap-y-16 lg:grid-cols-[1fr_1.4fr] lg:gap-x-20 lg:gap-y-0">
           {/* Left: the facts, as a ruled index. Key hangs in the left margin,
               value carries the weight. Phone and email are real links. */}

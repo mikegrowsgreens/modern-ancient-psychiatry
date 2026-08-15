@@ -32,7 +32,7 @@ const LAST_LINE = MANTRA_LINES.length - 1;
 
 export default function Mantra() {
   return (
-    <section className="bg-deep px-6 py-rhythm-open md:px-12 lg:px-[4.5rem]">
+    <section className="bg-deep px-6 pt-rhythm-open md:px-12 lg:px-[4.5rem]">
       <div className="flex w-full justify-center">
         {/* The one gold hairline circle. Centre left completely empty; the
             verse sits inside it. 60% opacity keeps it a ring of light rather

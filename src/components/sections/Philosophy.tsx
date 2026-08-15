@@ -11,14 +11,14 @@ import { em } from "@/content/emphasis";
  * sentence broken over five lines. Cormorant at `--t-subheading` needs a real
  * measure to read as a voice rather than as a column of fragments.
  *
- * Stacked at `--measure-display` it runs ~64ch at every breakpoint, and the
- * rhythm drops to `close` so this section and the IntroCard below it do not
+ * Stacked at `--measure-display` it runs ~64ch at every breakpoint. It opens on
+ * `default` and the IntroCard below it opens on `close`, so the two do not
  * share both rhythm and background (§7 rule 2) — that pairing was the one
  * metronome beat on the page.
  */
 export default function Philosophy() {
   return (
-    <section className="bg-deep px-6 py-rhythm-close md:px-12 lg:px-[4.5rem]">
+    <section className="bg-deep px-6 pt-rhythm-default md:px-12 lg:px-[4.5rem]">
       <div className="mx-auto max-w-index">
         <div className="flex max-w-display flex-col gap-rhythm-hairline">
           {PHILOSOPHY.map((statement, i) => (

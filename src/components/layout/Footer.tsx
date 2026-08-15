@@ -21,7 +21,7 @@ import {
  */
 export default function Footer() {
   return (
-    <footer className="border-t border-cream/[0.12] bg-deep px-6 py-rhythm-default md:px-12 lg:px-[4.5rem]">
+    <footer className="mt-rhythm-default border-t border-cream/[0.12] bg-deep px-6 py-rhythm-default md:px-12 lg:px-[4.5rem]">
       <div className="mx-auto w-full max-w-index">
         <div className="grid gap-14 lg:grid-cols-[2fr_1fr] lg:gap-20">
           <div>

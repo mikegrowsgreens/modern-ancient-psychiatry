@@ -25,9 +25,13 @@ import { EMERGENCY } from "@/content/shared";
 const NUMBER =
   "lining-nums tabular-nums inline-block py-1 font-heading text-title text-gold underline-offset-[6px] hover:underline focus-visible:underline";
 
+/*
+ * `mt` is the gap above the band, `py` is the air inside it. A filled element
+ * cannot use padding for both without the fill swallowing the gap.
+ */
 export default function EmergencyBanner() {
   return (
-    <aside className="relative border-b border-cream/[0.12] bg-surface px-6 py-rhythm-hairline md:px-12 lg:px-[4.5rem]">
+    <aside className="relative mt-rhythm-close border-b border-cream/[0.12] bg-surface px-6 py-rhythm-hairline md:px-12 lg:px-[4.5rem]">
       {/* Gold hairline above: this strip is a different piece of stock. */}
       <div aria-hidden className="absolute inset-x-0 top-0 h-px bg-gold/[0.28]" />
 

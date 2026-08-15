@@ -25,7 +25,7 @@ const RANGE = `01 — ${String(faqItems.length).padStart(2, "0")}`;
 
 export default function FAQ() {
   return (
-    <section className="bg-deep px-6 pb-rhythm-open pt-rhythm-default md:px-12 lg:px-[4.5rem]">
+    <section className="bg-deep px-6 pt-rhythm-default md:px-12 lg:px-[4.5rem]">
       <div className="mx-auto w-full max-w-index">
         <p className="tabular font-body text-label font-semibold uppercase text-gold">
           {RANGE}
