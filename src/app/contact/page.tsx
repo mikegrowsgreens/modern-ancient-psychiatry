@@ -1,11 +1,13 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import { CONTACT, EMERGENCY_DISCLAIMER, SOCIAL_LINKS } from "@/content/shared";
+import { CONTACT, SOCIAL_LINKS } from "@/content/shared";
+import EmergencyBanner from "@/components/sections/EmergencyBanner";
 import {
   CONTACT_DETAILS_HEADING,
   CONTACT_FACT_LABELS,
   CONTACT_HEADING,
   CONTACT_INTRO,
+  CONTACT_PLATE,
   FORM_HEADING,
 } from "@/content/contact";
 import ContactForm from "@/components/ui/ContactForm";
@@ -24,7 +26,9 @@ const KEY = "text-label uppercase text-muted";
 
 const VALUE = "font-heading text-title font-light text-cream";
 
-const VALUE_LINK = `${VALUE} transition-colors duration-micro ease-out hover:text-gold`;
+/* `min-h-11` lifts the phone and email anchors to the 44px target §15 asks
+   for; the ruled rows keep their own padding, so the rhythm does not move. */
+const VALUE_LINK = `${VALUE} inline-flex min-h-11 items-center transition-colors duration-micro ease-out hover:text-gold`;
 
 export default function ContactPage() {
   return (
@@ -32,17 +36,17 @@ export default function ContactPage() {
       <PageHero
         title={CONTACT_HEADING}
         image="/images/calm-black-water.jpg"
+        imageAlt={CONTACT_PLATE.alt}
+        imageLabel={CONTACT_PLATE.label}
         height="sm"
       />
 
-      {/* The site's only --surface element: a different piece of stock from the
-          program. Never gold, never --alert — this is a standing fact, not a
-          warning about the website. DESIGN.md §10. */}
-      <div className={`${GUTTER} rule-seam border-y bg-surface py-rhythm-hairline`}>
-        <p className="mx-auto w-full max-w-index text-fine text-cream/85">
-          {EMERGENCY_DISCLAIMER}
-        </p>
-      </div>
+      {/* The shared strip, not a local copy of it. The local one set the same
+          sentence as inert text at the index measure — 174 characters a line at
+          13px — and, worse, left 911 and 988 unlinked, so the one page a reader
+          is most likely to be on when they need them was the one page they
+          could not tap them from. */}
+      <EmergencyBanner />
 
       <section className={`${GUTTER} pb-rhythm-open pt-rhythm-default`}>
         <div className="mx-auto grid w-full max-w-index gap-y-16 lg:grid-cols-[1fr_1.4fr] lg:gap-x-20 lg:gap-y-0">

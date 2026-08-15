@@ -42,12 +42,26 @@ optimizer, and that `training.mikegrowsgreens.com` is still up. Never build on t
 the macOS one over the droplet's linux one silently reverts image optimization to serving
 full-size originals. The deploy script's image gate catches it.
 
+## Post-deploy design review — done 2026-08-15
+
+The `design-review` gate ran against the deployed build, plus an `avoid-ai-design` detect
+pass and a scripted sweep (contrast on every text node, hit targets, heading order, alt
+text, overflow, CLS, line-length, gutters, rhythm, motion) at 1440 / 1024 / 900 / 768 /
+640 / 375. **DESIGN.md §16 is the full list of what it found and what changed.**
+
+Headlines: the mobile menu had no way to close on a phone; §11's signature scroll moment
+had never been built; `PageHero` broke §9's absolute rule on three of four routes; and the
+FAQ light-card-over-photograph that §10 says is deleted was still shipping. All fixed.
+
+Clean going in and still clean: contrast (every text node, all routes, all viewports),
+CLS 0.0000, zero horizontal overflow, no infinite or scroll-gated motion, and zero P0/P1
+AI-slop tells.
+
 ## Next
 
 - Mike to look at the live site and decide what he wants changed.
-- Then run the `design-review` agent and an `avoid-ai-design` de-slop pass on the deployed
-  result (planned, not yet done).
-- 768 breakpoint has had less scrutiny than 1440 and 375.
+- 768 got the deepest scrutiny this round; it was the weakest breakpoint and is now level
+  with 1440 and 375.
 
 ## Blocked on Brittany
 

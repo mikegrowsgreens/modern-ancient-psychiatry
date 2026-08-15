@@ -336,7 +336,7 @@ Base unit `0.5rem` (8px); the steps are 5 / 9 / 14 / 22 units.
 
 `rounded-full` appears in exactly four places site-wide. Each has a job:
 
-1. **The hero seam circle** — a 1px gold hairline ring, transparent fill, straddling the bottom edge of the hero photograph. It is the seam between the image and the canvas.
+1. **The hero seam circle** — a 1px gold hairline ring, transparent fill, straddling the seam between the ink field and the plate. **`lg` and up only.** Below `lg` the composition stacks, so the seam becomes a full-width horizontal rule with flush-left type directly under it, and the ring's arc cut straight through the wall label *and* through "Virtual · Arizona residents only" at both 375 and 768. There the hairline is the seam and the ring is decoration, which circles here are not allowed to be.
 2. **The mantra circle** (About) — the Metta mantra set in `--t-verse` Cormorant italic inside a 1px gold ring on `--deep`.
 3. **The video play control** — 1px gold ring, transparent fill, gold triangle.
 4. **The single About portrait** of Brittany.
@@ -382,6 +382,16 @@ Contained, sharp-cornered, sitting directly on the canvas.
 Fixed. Height `4.5rem`. Transparent over the hero photograph.
 
 After `64px` of scroll it gains `background: rgb(var(--c-deep) / 0.72)`, `backdrop-filter: blur(12px)`, and a 1px bottom hairline at `rgb(var(--c-gold) / 0.22)`. This is the site's one permitted `backdrop-blur` and its one signature scroll moment (§11).
+
+**The unscrolled state carries a scrim.** Transparent-over-photograph is the intent, but at `lg` the nav sits over the home page's plate, and cream on sunlit petals is nowhere near the 4.5:1 floor §15 sets as a *minimum* — and a minimum outranks an aesthetic clause. So the bar itself is transparent and a `deep/90 → transparent` gradient confined to the header's own height sits behind it, fading out as the solid field fades in. It draws no edge, and it is the same device §2b promoted for type near photography. Only one of the two is ever doing the work.
+
+**The mobile panel needs a close control.** The `<dialog>` is full-bleed and opaque, so it covers the header and the hamburger that opened it — and with a transparent `::backdrop` behind a full-bleed panel there is no backdrop left to tap. Without an explicit control the only exits are Escape and committing to a nav link, which on a phone is a trap. The close button sits where the hamburger was.
+
+### Mobile booking bar
+
+Phones only. Ghost outlined link on `--deep`, 1px `--gold/0.20` hairline above, no `backdrop-blur` (§8 permits one and the header has it).
+
+**It must never be on screen at the same time as the gold field.** It watches `#booking-cta` and stands down whenever any part of the field is visible, so the same sentence is never offered twice at once. Scroll depth alone is not a sufficient trigger: on every page the depth that reads as "deep enough to offer" is the depth the field itself occupies. It fades; it never pops.
 
 Nav links: Cormorant, `--t-prose`, `rgb(var(--c-cream) / 0.85)`. Hover and current page: a 1px gold hairline underneath, `transform: scaleX(0 → 1)` from the left, `--motion-micro`, `ease-out` (the 601 Inc. borrow). No color change, no background, no pill.
 
@@ -621,6 +631,41 @@ Additional requirements:
 2. Screenshot at **1440 / 768 / 375** (`resize_window`). Note: the Browser pane fires no resize events — load each viewport fresh.
 3. Compare against this file: direction held? banned patterns absent? hierarchy reads?
 4. Iterate 2–3 rounds, then run the `design-review` agent for substantial diffs.
+
+### Measure is a character count, not a pixel width
+
+`--measure-prose` is 34rem because that is ~66 characters **at `--t-prose`**. The same box at `--t-fine` is 87 characters, and at `--measure-index` it is 174. So the measure alone does not protect a line — the size has to match the box.
+
+The rule: **any text a reader has to read in sequence sets at `--t-prose` inside `--measure-prose`.** `--t-fine` is for genuine footnotes — a line or two — and nothing longer. Whole sections had been set the other way round: the emergency strip, and eleven blocks of fee, cancellation and Good Faith Estimate terms on /services, were the smallest type on the site at the longest lines on the site.
+
+---
+
+## 16. What the post-deploy review changed
+
+The `design-review` gate ran against the deployed build on 2026-08-15. Contrast, CLS, overflow, motion budget and the AI-slop catalogue all came back clean and are unchanged. Everything below was found and fixed in that pass; each is written into the section it belongs to above.
+
+| Finding | Resolution |
+|---|---|
+| Mobile menu had no close control — the panel covered its own hamburger and left no backdrop to tap | Close button in the panel (§10) |
+| The signature scroll moment (§11.2) was never implemented; the header was a constant tinted bar | Implemented, with a scrim on the unscrolled state for §15 contrast (§10) |
+| `PageHero` layered the `h1` on a photograph on /about, /services and /contact — §9's absolute rule | Rebuilt: plate, hairline seam, title in the ink field below |
+| Nav hover and current page were colour changes, not the `scaleX` gold hairline | Hairline, per §10 |
+| The header CTA was a hand-rolled second button that filled solid gold on hover | Uses the shared ghost `Button` |
+| The FAQ light card over a photograph — §10 says the pattern is deleted — survived, and forced grey folios | Dark ruled index, gold folios; the `light` accordion variant is gone with it |
+| /contact's emergency strip ran 174 characters a line and left 911/988 unlinked | Uses the shared `EmergencyBanner` |
+| Seven container widths in use against §6's four | Back to four (§6) |
+| `.section-padding` still declared and still used by `PageHero` | Deleted |
+| Philosophy sat at a third left edge, ran 16ch at 768, and shared rhythm and canvas with the section below it (§7 rule 2) | Stacked at `--measure-display`, rhythm dropped to `close` |
+| The hero seam circle crossed two labels below `lg` | `lg` and up only (§8) |
+| The sticky mobile bar duplicated the gold field's CTA on screen | Observes the field and stands down (§10) |
+| Two footer hairlines were `deep/30` on the deep canvas — invisible | `cream/12` |
+| The About chapter break became two 187px slivers at 375 | Stacks below `md` |
+| Hit targets from 20px to 40px, including the hamburger and the 911/988 links | All ≥44px (§15) |
+| Non-delivery unmounted the form and discarded what the reader had typed | Form stays mounted below the notice |
+| `FadeIn.tsx` survived as a dead file §11 said to delete | Deleted |
+| `rounded-sm` on the skip link and in `Button`'s base | Removed |
+
+**Two review findings were wrong and are recorded so they are not "fixed" later:** the honeypot *is* hidden from assistive tech (`aria-hidden` sits on its wrapper, which hides descendants), and the form's status blocks *do* carry `role="status" aria-live="polite"` — they had been probed on the idle form, before either exists.
 
 ### Five-second test
 

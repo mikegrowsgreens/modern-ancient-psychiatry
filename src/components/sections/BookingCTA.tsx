@@ -1,6 +1,7 @@
 import Button from "@/components/ui/Button";
 import { BOOKING_CTA } from "@/content/home";
 import { CONTACT } from "@/content/shared";
+import { BOOKING_CTA_ID } from "@/lib/site";
 
 /**
  * The one gold field on the page (DESIGN.md §10), and the only place on the
@@ -13,7 +14,10 @@ import { CONTACT } from "@/content/shared";
  */
 export default function BookingCTA() {
   return (
-    <section className="bg-gold-deep px-6 py-rhythm-open md:px-12 lg:px-[4.5rem]">
+    <section
+      id={BOOKING_CTA_ID}
+      className="bg-gold-deep px-6 py-rhythm-open md:px-12 lg:px-[4.5rem]"
+    >
       <div className="mx-auto grid w-full max-w-index gap-14 lg:grid-cols-[1fr_20rem] lg:gap-20">
         <div>
           <h2 className="max-w-display font-heading text-display font-light text-deep">
@@ -44,7 +48,7 @@ export default function BookingCTA() {
           <li className="border-b border-deep/30 py-4">
             <a
               href={CONTACT.phoneHref}
-              className="lining-nums tabular-nums font-heading text-title text-deep underline-offset-[6px] hover:underline"
+              className="inline-flex min-h-11 items-center font-heading text-title lining-nums tabular-nums text-deep underline-offset-[6px] hover:underline"
             >
               {CONTACT.phone}
             </a>

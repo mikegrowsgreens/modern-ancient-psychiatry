@@ -58,19 +58,22 @@ export default function Footer() {
           </div>
 
           {/* Contact facts as a hairline-ruled index, not a labelled column. */}
-          <ul className="border-t border-deep/30">
-            <li className="border-b border-cream/[0.12] py-4">
+          {/* `cream/12`, not `deep/30`: this rule sits on the deep canvas, where a
+              deep hairline is invisible. The gold field's deep rules are correct
+              on gold; this one was copied onto the wrong ground. */}
+          <ul className="border-t border-cream/[0.12]">
+            <li className="border-b border-cream/[0.12] py-1">
               <a
                 href={CONTACT.phoneHref}
-                className="lining-nums tabular-nums font-heading text-title text-cream underline-offset-[6px] hover:underline"
+                className="inline-flex min-h-11 items-center font-heading text-title lining-nums tabular-nums text-cream underline-offset-[6px] hover:underline"
               >
                 {CONTACT.phone}
               </a>
             </li>
-            <li className="border-b border-cream/[0.12] py-4">
+            <li className="border-b border-cream/[0.12] py-1">
               <a
                 href={CONTACT.emailHref}
-                className="break-all font-body text-fine text-cream underline-offset-[6px] hover:underline"
+                className="inline-flex min-h-11 items-center break-all font-body text-fine text-cream underline-offset-[6px] hover:underline"
               >
                 {CONTACT.email}
               </a>
@@ -81,13 +84,13 @@ export default function Footer() {
           </ul>
         </div>
 
-        <nav aria-label="Footer" className="mt-14 border-t border-deep/30 pt-6">
+        <nav aria-label="Footer" className="mt-14 border-t border-cream/[0.12] pt-6">
           <ul className="flex flex-wrap gap-x-10 gap-y-3">
             {NAV_ITEMS.map((item) => (
               <li key={item.href}>
                 <Link
                   href={item.href}
-                  className="font-heading text-body text-cream underline-offset-[6px] hover:underline"
+                  className="inline-flex min-h-11 items-center font-heading text-body text-cream underline-offset-[6px] hover:underline"
                 >
                   {item.label}
                 </Link>
@@ -96,7 +99,7 @@ export default function Footer() {
           </ul>
         </nav>
 
-        <p className="mt-10 max-w-display font-body text-fine leading-[1.6] text-muted">
+        <p className="mt-10 max-w-prose font-body text-fine leading-[1.6] text-muted">
           {FOOTER_LEGAL}
         </p>
       </div>

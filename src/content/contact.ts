@@ -1,5 +1,11 @@
 export const CONTACT_HEADING = "Contact Me";
 
+/** Opening plate. Subject only — a wall label states facts, never mood. */
+export const CONTACT_PLATE = {
+  alt: "Backlit fountain-grass seed heads against still blue water",
+  label: "Fountain grass in seed",
+} as const;
+
 export const FORM_DISCLAIMER =
   "Please do not include sensitive personal or medical information via this form. This form is not monitored 24/7.";
 

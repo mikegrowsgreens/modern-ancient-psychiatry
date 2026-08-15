@@ -20,36 +20,32 @@ type AccordionItem = {
  * or an opacity. Documented deviation, DESIGN.md §11.4 — it is the only
  * technique that animates to intrinsic content height without a measured pixel
  * value, and it is scoped to this panel.
+ *
+ * The `light` variant is gone with the cream plate it existed for. It swapped
+ * the gold folios and hairlines for `--deep` at alpha because gold measures
+ * ~2:1 on cream — which meant the FAQ was the one index on the site that did
+ * not rank in gold. One index, one set of tokens.
  */
+const RULE = "border-gold/[0.28]";
+
 export default function Accordion({
   items,
-  variant = "dark",
   idPrefix = "faq",
 }: {
   items: readonly AccordionItem[];
-  variant?: "dark" | "light";
   idPrefix?: string;
 }) {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
-  const light = variant === "light";
-
-  // On the cream plate, gold measures ~2:1 and fails outright — the light
-  // variant takes its rules and numerals from --deep at alpha instead.
-  const rule = light ? "border-deep/20" : "border-gold/[0.28]";
-  const folio = light ? "text-deep/70" : "text-gold";
-  const question = light ? "text-deep" : "text-cream";
-  const answer = light ? "text-deep/70" : "text-cream/85";
-  const stroke = light ? "bg-deep/70" : "bg-gold";
 
   return (
-    <div className={`border-t ${rule}`}>
+    <div className={`border-t ${RULE}`}>
       {items.map((item, i) => {
         const isOpen = openIndex === i;
         const panelId = `${idPrefix}-panel-${i}`;
         const buttonId = `${idPrefix}-question-${i}`;
 
         return (
-          <div key={item.question} className={`border-b ${rule}`}>
+          <div key={item.question} className={`border-b ${RULE}`}>
             <h3>
               <button
                 type="button"
@@ -60,20 +56,20 @@ export default function Accordion({
                 className="grid w-full grid-cols-[2.75rem_1fr_1.5rem] items-start gap-x-4 py-6 text-left lg:grid-cols-[3.5rem_1fr_1.5rem] lg:gap-x-8"
               >
                 <span
-                  className={`tabular pt-2 font-body text-label font-semibold uppercase ${folio}`}
+                  className="tabular pt-2 font-body text-label font-semibold uppercase text-gold"
                 >
                   {String(i + 1).padStart(2, "0")}
                 </span>
 
-                <span className={`font-heading text-title font-light ${question}`}>
+                <span className="font-heading text-title font-light text-cream">
                   {item.question}
                 </span>
 
                 {/* Two 1px rules forming a +. The vertical stroke scales to 0. */}
                 <span aria-hidden className="relative mt-2 block h-3 w-3 justify-self-end">
-                  <span className={`absolute left-0 top-1/2 h-px w-3 ${stroke}`} />
+                  <span className="absolute left-0 top-1/2 h-px w-3 bg-gold" />
                   <span
-                    className={`absolute left-1/2 top-0 h-3 w-px origin-center -translate-x-1/2 transition-transform duration-standard ease-out ${stroke} ${
+                    className={`absolute left-1/2 top-0 h-3 w-px origin-center -translate-x-1/2 transition-transform duration-standard ease-out bg-gold ${
                       isOpen ? "scale-y-0" : "scale-y-100"
                     }`}
                   />
@@ -91,7 +87,7 @@ export default function Accordion({
             >
               <div className="overflow-hidden">
                 <p
-                  className={`max-w-prose pb-8 pl-[3.75rem] font-body text-body leading-[1.7] lg:pl-[4.5rem] ${answer}`}
+                  className="max-w-prose pb-8 pl-[3.75rem] font-body text-body leading-[1.7] text-cream/85 lg:pl-[4.5rem]"
                 >
                   {item.answer}
                 </p>

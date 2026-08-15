@@ -124,19 +124,27 @@ export default function ContactForm() {
     );
   }
 
-  if (status === "undelivered" || status === "failed") {
-    const copy = status === "undelivered" ? FORM_UNDELIVERED : FORM_FAILURE;
-    return (
-      <div role="status" aria-live="polite" className="max-w-prose">
-        <p
-          ref={outcomeRef}
-          tabIndex={-1}
-          className="font-heading text-title font-light text-alert"
-        >
-          {copy.heading}
-        </p>
-        <p className="mt-4 text-body text-cream/85">{copy.body}</p>
-        <dl className="mt-6">
+  const sending = status === "sending";
+  const undelivered = status === "undelivered" || status === "failed";
+  const copy = status === "failed" ? FORM_FAILURE : FORM_UNDELIVERED;
+
+  /*
+   * Non-delivery keeps the form mounted underneath. It used to unmount and be
+   * replaced by this block, which threw away whatever the reader had typed —
+   * on a page whose whole job is "someone prepared for me", losing their words
+   * at the last step is the worst moment to fail them.
+   */
+  const outcome = undelivered ? (
+    <div role="status" aria-live="polite" className="mb-12 max-w-prose">
+      <p
+        ref={outcomeRef}
+        tabIndex={-1}
+        className="font-heading text-title font-light text-alert"
+      >
+        {copy.heading}
+      </p>
+      <p className="mt-4 text-body text-cream/85">{copy.body}</p>
+      <dl className="mt-6">
           <div className="rule-seam flex flex-wrap items-baseline gap-x-6 border-t py-3">
             <dt className="text-label uppercase text-muted">
               {CONTACT_FACT_LABELS.phone}
@@ -144,7 +152,7 @@ export default function ContactForm() {
             <dd>
               <a
                 href={CONTACT.phoneHref}
-                className="tabular font-heading text-title font-light text-cream transition-colors duration-micro ease-out hover:text-gold"
+                className="tabular inline-flex min-h-11 items-center font-heading text-title font-light text-cream transition-colors duration-micro ease-out hover:text-gold"
               >
                 {CONTACT.phone}
               </a>
@@ -157,26 +165,25 @@ export default function ContactForm() {
             <dd>
               <a
                 href={CONTACT.emailHref}
-                className="break-all font-heading text-title font-light text-cream transition-colors duration-micro ease-out hover:text-gold"
+                className="inline-flex min-h-11 items-center break-all font-heading text-title font-light text-cream transition-colors duration-micro ease-out hover:text-gold"
               >
                 {CONTACT.email}
               </a>
             </dd>
           </div>
-        </dl>
-      </div>
-    );
-  }
-
-  const sending = status === "sending";
+      </dl>
+    </div>
+  ) : null;
 
   return (
-    <form
-      onSubmit={handleSubmit}
-      noValidate
-      aria-busy={sending}
-      className="max-w-prose space-y-8"
-    >
+    <>
+      {outcome}
+      <form
+        onSubmit={handleSubmit}
+        noValidate
+        aria-busy={sending}
+        className="max-w-prose space-y-8"
+      >
       <div>
         <label htmlFor={FORM_FIELDS.name.id} className={LABEL}>
           {FORM_FIELDS.name.label}
@@ -309,6 +316,7 @@ export default function ContactForm() {
         ) : null}
         {sending ? FORM_SUBMIT.sending : FORM_SUBMIT.idle}
       </button>
-    </form>
+      </form>
+    </>
   );
 }

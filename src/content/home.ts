@@ -64,8 +64,6 @@ export const FAQ_HEADING = "Frequently asked questions";
 
 // Backdrop for the FAQ section. Alt describes the photograph; the section's
 // own heading carries the meaning, so it is decorative-but-described.
-export const FAQ_PLATE_ALT =
-  "Wheat heads against an open sky, photographed from below";
 
 export const FAQ = [
   {

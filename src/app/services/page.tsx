@@ -44,6 +44,8 @@ export default function ServicesPage() {
         title={SERVICES_HERO.title}
         intro={SERVICES_HERO.intro}
         image="/images/butterfly-on-flowers.jpg"
+        imageAlt={SERVICES_HERO.plateAlt}
+        imageLabel={SERVICES_HERO.plateLabel}
       />
 
       {/* ================= APPOINTMENTS =====================================
@@ -194,25 +196,41 @@ export default function ServicesPage() {
             {POLICIES_INTRO}
           </p>
 
+          {/* A hanging gold folio per policy, so eleven blocks of terms can be
+              counted, scanned and skipped rather than waded through — that is
+              what the index grammar is for (§10). The headings stay at label
+              size: these are subordinate to Brittany's own narrative and should
+              read that way. The body does not stay at `--t-fine`, though. 13px
+              across `--measure-prose` runs 87 characters a line, and this is
+              where the fees, the cancellation charge and the Good Faith
+              Estimate rights live — the text a reader is most likely to need to
+              read carefully was set smaller and longer than anything else on
+              the site. At `--t-prose` the same measure is 66 characters. */}
           <div className="rule-seam mt-12 border-t">
-            {Object.values(POLICIES).map((policy) => (
+            {Object.values(POLICIES).map((policy, i) => (
               <div
                 key={policy.heading}
-                className="rule-seam grid gap-y-3 border-b py-6 lg:grid-cols-[16rem_1fr] lg:gap-x-12"
+                className="rule-seam grid grid-cols-[2.75rem_1fr] gap-y-3 border-b py-7 lg:grid-cols-[3.5rem_14rem_1fr] lg:gap-x-8"
               >
-                <h3 className="text-label uppercase text-muted">
+                <p className="tabular pt-1 text-label font-semibold uppercase text-gold">
+                  {String(i + 1).padStart(2, "0")}
+                </p>
+
+                <h3 className="pt-1 text-label uppercase text-muted">
                   {policy.heading}
                 </h3>
 
-                <div className="max-w-prose">
-                  <p className="text-fine text-cream/85">{policy.text}</p>
+                <div className="col-start-2 max-w-prose lg:col-start-3">
+                  <p className="text-body leading-[1.7] text-cream/85">
+                    {policy.text}
+                  </p>
 
                   {policy.points ? (
-                    <ul className="mt-3 space-y-1">
+                    <ul className="mt-4 space-y-2">
                       {policy.points.map((point) => (
                         <li
                           key={point}
-                          className="rule-seam border-l pl-4 text-fine text-muted"
+                          className="rule-seam border-l pl-4 text-body leading-[1.7] text-muted"
                         >
                           {point}
                         </li>
@@ -221,7 +239,7 @@ export default function ServicesPage() {
                   ) : null}
 
                   {policy.note ? (
-                    <p className="mt-3 text-fine text-muted">{policy.note}</p>
+                    <p className="mt-4 text-fine text-muted">{policy.note}</p>
                   ) : null}
                 </div>
               </div>

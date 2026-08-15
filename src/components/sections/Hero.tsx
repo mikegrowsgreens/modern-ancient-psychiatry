@@ -36,23 +36,21 @@ export default function Hero() {
               className="object-cover"
             />
 
-            {/* Seam circle — mobile. Straddles the bottom edge of the plate.
-                Sized in vw so it can never overflow a 375 viewport the way the
-                previous fixed 420px circle did. Positioning lives on the
-                wrapper because animate-enter animates `transform` and would
-                otherwise clobber the centering translate. */}
-            <div
-              aria-hidden
-              className="pointer-events-none absolute bottom-0 left-1/2 aspect-square w-[min(78vw,22rem)] -translate-x-1/2 translate-y-1/2 lg:hidden"
-            >
-              <div
-                style={STEP[2]}
-                className="animate-enter h-full w-full rounded-full border border-gold/60"
-              />
-            </div>
           </div>
 
-          {/* Wall label. A fact — subject, place, year. Never a mood word. */}
+          {/*
+            Wall label. A fact — subject, place, year. Never a mood word.
+
+            The hairline above it is the seam below `lg`. There used to be a
+            gold ring here too, straddling this edge — but the seam is
+            horizontal and full-width here, with flush-left type immediately
+            under it, so the ring's arc cut straight through this label and
+            through "Virtual · Arizona residents only" below it at both 375 and
+            768. A circle crossing two labels is decoration, and §8 reserves
+            circles for the ones that mean something. Above `lg` the seam is
+            vertical and runs through open space, which is where the ring
+            belongs and where it still is.
+          */}
           <div className="border-t border-cream/[0.12] px-6 py-5 md:px-12 lg:px-10">
             <p className={`${LABEL} text-muted`}>{HERO.plateLabel}</p>
           </div>

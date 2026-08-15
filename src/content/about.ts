@@ -1,6 +1,15 @@
 export const HERO_TITLE = "The Person Behind the Practice";
 
 /**
+ * The opening plate. Subject only: place and year go in once Brittany confirms
+ * them — a wall label invents nothing (DESIGN.md §9).
+ */
+export const HERO_PLATE = {
+  alt: "A singing bowl engraved with a flower-of-life pattern, held in one hand with the striker in the other, in tall dry grass",
+  label: "Singing bowl · flower of life",
+} as const;
+
+/**
  * Copy is Brittany's, verbatim (DESIGN.md §12). The only strings this file adds
  * are wall labels, alt text, and index numerals — facts (credential, subject,
  * place, year), never eyebrows and never prose she did not write.

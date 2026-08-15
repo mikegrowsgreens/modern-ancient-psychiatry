@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import {
   HERO_TITLE,
+  HERO_PLATE,
   BIO,
   PERSONAL,
   MEDITATION,
@@ -29,7 +30,12 @@ const folio = (i: number) => String(i + 1).padStart(2, "0");
 export default function AboutPage() {
   return (
     <>
-      <PageHero title={HERO_TITLE} image="/images/singing-bowls-hero.jpg" />
+      <PageHero
+        title={HERO_TITLE}
+        image="/images/singing-bowls-hero.jpg"
+        imageAlt={HERO_PLATE.alt}
+        imageLabel={HERO_PLATE.label}
+      />
 
       {/* ── Bio ──────────────────────────────────────────────────────────────
           The site's ONE circular portrait (DESIGN.md §8 reserves `rounded-full`
@@ -140,12 +146,16 @@ export default function AboutPage() {
           Full-bleed, wordless, one per page. A 1px seam above, below, and
           between the two plates; no wall label, no scrim, no heading. The
           photograph is the gap (DESIGN.md §9, `--rhythm-chapter: 0`). */}
-      <div className="grid grid-cols-2 border-y border-cream/[0.12]">
+      {/* Side by side from `md` up. At 375 two columns made each plate a
+          187px-wide sliver that cropped the dunes shot to a strip of shadow and
+          cut the Sedona butte off entirely — so below `md` they stack, at half
+          the height each, and the pair still totals one break's worth of gap. */}
+      <div className="grid grid-cols-1 border-y border-cream/[0.12] md:grid-cols-2">
         {CHAPTER.map((plate, i) => (
           <div
             key={plate.src}
-            className={`relative h-[52vh] lg:h-[62vh] ${
-              i === 0 ? "border-r border-cream/[0.12]" : ""
+            className={`relative h-[34vh] md:h-[52vh] lg:h-[62vh] ${
+              i === 0 ? "border-b border-cream/[0.12] md:border-b-0 md:border-r" : ""
             }`}
           >
             <Image

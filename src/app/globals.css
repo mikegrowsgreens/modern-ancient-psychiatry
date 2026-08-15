@@ -28,7 +28,8 @@
     --c-alert: 196 103 79;      /* #C4674F  form errors ONLY     5.1:1 on deep */
 
     /* Layout */
-    --header-h: 5.5rem;         /* replaces a hardcoded top:"89px" magic number */
+    --header-h: 4.5rem;         /* DESIGN.md §10. Was 5.5rem to clear an 80px
+                                   logo that had 4px of air above and below it. */
 
     /* Motion — MOTION.md tokens */
     --motion-micro: 140ms;
@@ -71,15 +72,14 @@
   }
 }
 
-@layer components {
-  .section-padding {
-    @apply px-6 py-20 md:px-12 lg:px-24 lg:py-28;
-  }
-
-  .content-width {
-    @apply max-w-4xl mx-auto;
-  }
-}
+/*
+ * `.section-padding` and `.content-width` are deleted, not deprecated.
+ *
+ * One padding value on every section is the metronome DESIGN.md §7 exists to
+ * break, and §13 bans the class by name; it survived here and on PageHero.
+ * `.content-width` wrapped `max-w-4xl`, a fifth container width against §6's
+ * four, and had no call sites left at all.
+ */
 
 @layer utilities {
   .text-balance {

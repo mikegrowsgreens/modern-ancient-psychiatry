@@ -4,6 +4,10 @@ export const SERVICES_HERO = {
   title: "A Personalized Approach",
   intro:
     "Treatment is collaborative and tailored to your unique needs and goals. Whether you are seeking symptom relief, deeper self-understanding, or a more authentic way of living, care is designed to support you in reconnecting with your own capacity for healing.",
+  /** Opening plate. Subject only — a wall label states facts, never mood. */
+  plateAlt:
+    "A blue tiger butterfly with pale spotted wings resting open on a lantana bush",
+  plateLabel: "Blue tiger butterfly on lantana",
 } as const;
 
 /**

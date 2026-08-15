@@ -7,6 +7,12 @@ export const NAV_ITEMS = [
 
 export const BOOK_CTA_LABEL = "Book a Consultation";
 
+/** Accessible names for the mobile menu's two controls. */
+export const MENU_LABELS = {
+  open: "Menu",
+  close: "Close menu",
+} as const;
+
 export const EMERGENCY_DISCLAIMER =
   "If you are experiencing a mental health emergency, suicidal thoughts, or are in crisis, call 911, go to your nearest emergency room, or contact 988 immediately. Messages submitted through this website are not monitored 24/7.";
 

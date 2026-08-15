@@ -14,7 +14,7 @@ import { EMERGENCY } from "@/content/shared";
 // Cormorant ships old-style figures by default, which set "911" as "9 i i".
 // `lining-nums` is required on every Cormorant numeral on the site.
 const NUMBER =
-  "lining-nums tabular-nums inline-block py-1 font-heading text-title text-gold underline-offset-[6px] hover:underline focus-visible:underline";
+  "lining-nums tabular-nums inline-flex min-h-11 items-center px-1 font-heading text-title text-gold underline-offset-[6px] hover:underline focus-visible:underline";
 
 export default function EmergencyBanner() {
   return (
@@ -23,7 +23,12 @@ export default function EmergencyBanner() {
       <div aria-hidden className="absolute inset-x-0 top-0 h-px bg-gold/[0.28]" />
 
       <div className="mx-auto w-full max-w-index">
-        <p className="max-w-display font-body text-fine leading-[1.9] text-cream/85">
+        {/* `--t-prose` at `--measure-prose`, not `--t-fine` at
+            `--measure-display`: 13px across 46rem ran 118 characters a line —
+            174 on /contact, where this strip sat at the index measure. This is
+            the most important safety content on the site and it was set at the
+            longest line and the smallest size on the page. */}
+        <p className="max-w-prose font-body text-body leading-[1.8] text-cream/85">
           {EMERGENCY.lead}{" "}
           <a href={EMERGENCY.emergency.href} className={NUMBER}>
             {EMERGENCY.emergency.number}
@@ -34,7 +39,7 @@ export default function EmergencyBanner() {
           </a>{" "}
           {EMERGENCY.tail}
         </p>
-        <p className="mt-3 max-w-display font-body text-fine leading-[1.6] text-muted">
+        <p className="mt-3 max-w-prose font-body text-fine leading-[1.6] text-muted">
           {EMERGENCY.note}
         </p>
       </div>
