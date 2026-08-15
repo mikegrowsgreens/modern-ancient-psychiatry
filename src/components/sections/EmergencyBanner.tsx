@@ -13,8 +13,17 @@ import { EMERGENCY } from "@/content/shared";
 
 // Cormorant ships old-style figures by default, which set "911" as "9 i i".
 // `lining-nums` is required on every Cormorant numeral on the site.
+//
+// These two stay at ~37px rather than being forced to 44. They are inline
+// links inside a sentence, which is the case WCAG 2.5.8 exempts by name
+// ("the target is in a sentence or its size is otherwise constrained by the
+// line-height of non-target text") — and the two attempts to force it both
+// damaged the sentence: padding pushed the following comma off ("call 911 ,
+// go to"), and a min-height stretched that one line's leading. They are set at
+// --t-title, which already makes them the largest thing in the strip and much
+// larger than the surrounding text.
 const NUMBER =
-  "lining-nums tabular-nums inline-flex min-h-11 items-center px-1 font-heading text-title text-gold underline-offset-[6px] hover:underline focus-visible:underline";
+  "lining-nums tabular-nums inline-block py-1 font-heading text-title text-gold underline-offset-[6px] hover:underline focus-visible:underline";
 
 export default function EmergencyBanner() {
   return (

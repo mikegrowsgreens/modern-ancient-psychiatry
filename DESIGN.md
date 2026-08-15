@@ -621,7 +621,7 @@ Additional requirements:
 
 - Alt text is a **description**, matching the wall-label discipline — never "image" or the filename.
 - Every accordion row is a real `<button aria-expanded>`; every form error is bound via `aria-describedby` and `aria-invalid`, never signalled by color alone.
-- Hit targets `≥44px`.
+- Hit targets `≥44px`, with **one exemption: links inline inside a sentence.** WCAG 2.5.8 carves these out by name ("the target is in a sentence or its size is otherwise constrained by the line-height of non-target text"), and forcing them costs more than it buys — padding on the 911 link pushed the following comma off the numeral, and a min-height stretched that one line's leading. Every *standalone* control — nav, buttons, footer links, phone and email rows, the accordion rows, the mobile trigger — is ≥44px with no exceptions.
 - The header's `backdrop-blur` must not drop text contrast below 4.5:1 — the `0.72` alpha on `--deep` is what guarantees it; do not lower it.
 - GA4 `G-LCRF7SMS2P` on all deployed pages (MGG standard).
 
