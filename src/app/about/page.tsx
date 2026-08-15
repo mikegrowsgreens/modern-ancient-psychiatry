@@ -162,7 +162,14 @@ export default function AboutPage() {
               src={plate.src}
               alt={plate.alt}
               fill
-              sizes="50vw"
+              // The pair stacks full-width below `md` now, so `50vw` alone
+              // under-requested and both plates rendered soft at 375.
+              sizes="(max-width: 767px) 100vw, 50vw"
+              // These two are the heaviest assets on the site — wordless,
+              // full-bleed, and dark, which is exactly the case where q=75 buys
+              // nothing a reader can see. There is no type over them and no
+              // fine detail carrying meaning.
+              quality={60}
               className="object-cover"
             />
           </div>

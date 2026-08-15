@@ -111,11 +111,16 @@ export default function Header() {
           {/* No aria-label here: the Image's alt already names the link, and an
               aria-label would silently override it. */}
           <Link href="/" className="shrink-0">
+            {/* `sizes` is load-bearing. Without it Next falls back to the
+                declared 400px width, builds a srcset off the device sizes, and
+                ships a 640px file for a 92px mark — 7x oversampled, on every
+                page, and the single heaviest avoidable asset on the site. */}
             <Image
               src="/images/logo-trimmed-nobg.png"
               alt="Modern Ancient Psychiatry"
               width={400}
               height={209}
+              sizes="96px"
               className="h-12 w-auto opacity-90 transition-opacity duration-micro ease-out hover:opacity-100"
               priority
             />

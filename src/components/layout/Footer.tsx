@@ -30,6 +30,7 @@ export default function Footer() {
               alt="Modern Ancient Psychiatry"
               width={400}
               height={209}
+              sizes="128px"
               className="h-16 w-auto opacity-90"
             />
             <p className="mt-8 max-w-display font-heading text-verse font-light text-cream">

@@ -23,7 +23,10 @@ export default function IntroCard() {
               alt={INTRO.portraitAlt}
               fill
               className="object-cover object-top"
-              sizes="(max-width: 768px) 100vw, 18rem"
+              // 767, not 768. Tailwind's `md` is `min-width: 768px`, so at
+              // exactly 768 the layout is already the 18rem column while a
+              // `max-width: 768px` query still claims the full viewport.
+              sizes="(max-width: 767px) 100vw, 18rem"
             />
           </div>
           <figcaption className="mt-4 font-body text-label font-semibold uppercase text-muted">
