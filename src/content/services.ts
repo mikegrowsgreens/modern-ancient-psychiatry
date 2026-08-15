@@ -1,5 +1,10 @@
-export const SERVICES_INTRO =
-  "A Personalized Approach\nTreatment is collaborative and tailored to your unique needs and goals. Whether you are seeking symptom relief, deeper self-understanding, or a more authentic way of living, care is designed to support you in reconnecting with your own capacity for healing.";
+// Was a single string with an embedded "\n" that got rendered as one <p>, which
+// is why this page had no <h1>. Split so the title can be a real heading.
+export const SERVICES_HERO = {
+  title: "A Personalized Approach",
+  intro:
+    "Treatment is collaborative and tailored to your unique needs and goals. Whether you are seeking symptom relief, deeper self-understanding, or a more authentic way of living, care is designed to support you in reconnecting with your own capacity for healing.",
+} as const;
 
 export type Service = {
   name: string;

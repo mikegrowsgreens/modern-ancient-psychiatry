@@ -16,18 +16,16 @@ export const CONTACT = {
   location: "Virtual in Arizona",
 } as const;
 
-export const SOCIAL_LINKS = [
-  {
-    label: "Facebook",
-    href: "#", // Replace with Brittany's actual URL
-    icon: "/images/facebook-social.png",
-  },
-  {
-    label: "Instagram",
-    href: "#", // Replace with Brittany's actual URL
-    icon: "/images/instagram-social.png",
-  },
-] as const;
+/**
+ * Empty on purpose. Both entries were `href: "#"` placeholders rendering as
+ * dead links in the footer and on /contact, and the practice's own live site
+ * has no social presence to link to. Add real URLs here and both render again.
+ */
+export const SOCIAL_LINKS: ReadonlyArray<{
+  label: string;
+  href: string;
+  icon: string;
+}> = [];
 
 export const FOOTER_TAGLINE =
   "Psychiatry rooted in science, guided by presence, and grounded in compassion.";

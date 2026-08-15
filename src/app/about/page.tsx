@@ -8,6 +8,7 @@ import {
   APPROACH,
 } from "@/content/about";
 import BookingCTA from "@/components/sections/BookingCTA";
+import PageHero from "@/components/layout/PageHero";
 import FadeIn from "@/components/ui/FadeIn";
 
 export const metadata: Metadata = {
@@ -17,24 +18,7 @@ export const metadata: Metadata = {
 export default function AboutPage() {
   return (
     <>
-      {/* Hero banner */}
-      <section className="relative h-[50vh] min-h-[360px] flex items-end overflow-hidden">
-        <div className="absolute inset-0">
-          <Image
-            src="/images/singing-bowls-hero.jpg"
-            alt=""
-            fill
-            className="object-cover"
-            priority
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-deep via-deep/60 to-transparent" />
-        </div>
-        <div className="relative z-10 section-padding pb-12">
-          <h1 className="font-heading text-display text-cream font-light">
-            {HERO_TITLE}
-          </h1>
-        </div>
-      </section>
+      <PageHero title={HERO_TITLE} image="/images/singing-bowls-hero.jpg" />
 
       {/* Bio section */}
       <section className="section-padding bg-deep">

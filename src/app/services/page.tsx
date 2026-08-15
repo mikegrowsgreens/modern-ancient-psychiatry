@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import {
-  SERVICES_INTRO,
+  SERVICES_HERO,
   SERVICES,
   FEE_SCHEDULE,
   FEE_NOTICE,
@@ -11,6 +10,7 @@ import {
 } from "@/content/services";
 import ServiceCard from "@/components/ui/ServiceCard";
 import BookingCTA from "@/components/sections/BookingCTA";
+import PageHero from "@/components/layout/PageHero";
 import FadeIn from "@/components/ui/FadeIn";
 
 export const metadata: Metadata = {
@@ -20,24 +20,11 @@ export const metadata: Metadata = {
 export default function ServicesPage() {
   return (
     <>
-      {/* Hero with butterfly image */}
-      <section className="relative h-[45vh] min-h-[320px] flex items-end overflow-hidden">
-        <div className="absolute inset-0">
-          <Image
-            src="/images/butterfly-on-flowers.jpg"
-            alt=""
-            fill
-            className="object-cover"
-            priority
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-deep via-deep/60 to-transparent" />
-        </div>
-        <div className="relative z-10 section-padding pb-12">
-          <p className="text-cream/85 leading-relaxed max-w-3xl whitespace-pre-line">
-            {SERVICES_INTRO}
-          </p>
-        </div>
-      </section>
+      <PageHero
+        title={SERVICES_HERO.title}
+        intro={SERVICES_HERO.intro}
+        image="/images/butterfly-on-flowers.jpg"
+      />
 
       {/* Services grid */}
       <section className="section-padding bg-deep">

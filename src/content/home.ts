@@ -4,10 +4,20 @@ export const HERO = {
   tagline: "Honoring where you are, holding space for where you want to be",
 } as const;
 
+// `*word*` renders as <em> via src/content/emphasis.tsx. Emphasis lives here,
+// in the copy, not in the component — Philosophy.tsx used to hardcode statement
+// [2]'s markup in JSX and branch on index, so editing this array did nothing.
 export const PHILOSOPHY = [
-  "Modern Ancient Psychiatry is for people who want depth not just surface level care",
-  "It was created for those who value intention, relational care",
-  "Care that honors the connection between mind, body, and nervous system",
+  {
+    text: "Modern Ancient Psychiatry is for people who want depth not just surface level care",
+  },
+  {
+    text: "It was created for those who value intention, relational care",
+    tone: "accent",
+  },
+  {
+    text: "Care that honors the connection between *mind*, *body*, and *nervous system*",
+  },
 ] as const;
 
 export const INTRO = {
@@ -85,7 +95,14 @@ export const VIDEO = {
 export const BOOKING_CTA = {
   pretext:
     "I work with adults seeking a deeper, more intentional approach to mental health care.",
-  heading: "Start your healing journey",
-  subtext:
-    "You do not need to have everything figured out to begin",
+  subtext: "You do not need to have everything figured out to begin",
+  // Was hardcoded in both BookingCTA.tsx and MobileBookingBar.tsx while
+  // `heading` sat here unrendered.
+  cta: "Start your healing journey",
+  // The facts someone weighing a first call actually needs.
+  facts: [
+    "Virtual · Arizona residents only",
+    "Adults 18+",
+    "Self-pay · superbill on request",
+  ],
 } as const;

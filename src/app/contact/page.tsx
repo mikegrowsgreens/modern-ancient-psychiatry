@@ -3,6 +3,7 @@ import Image from "next/image";
 import { CONTACT, EMERGENCY_DISCLAIMER, SOCIAL_LINKS } from "@/content/shared";
 import { CONTACT_HEADING, CONTACT_INTRO } from "@/content/contact";
 import ContactForm from "@/components/ui/ContactForm";
+import PageHero from "@/components/layout/PageHero";
 
 export const metadata: Metadata = {
   title: "Contact",
@@ -11,24 +12,11 @@ export const metadata: Metadata = {
 export default function ContactPage() {
   return (
     <>
-      {/* Hero with sand/water image */}
-      <section className="relative h-[40vh] min-h-[300px] flex items-end overflow-hidden">
-        <div className="absolute inset-0">
-          <Image
-            src="/images/calm-black-water.jpg"
-            alt=""
-            fill
-            className="object-cover"
-            priority
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-deep via-deep/60 to-transparent" />
-        </div>
-        <div className="relative z-10 section-padding pb-12">
-          <h1 className="font-heading text-display text-cream font-light">
-            {CONTACT_HEADING}
-          </h1>
-        </div>
-      </section>
+      <PageHero
+        title={CONTACT_HEADING}
+        image="/images/calm-black-water.jpg"
+        height="sm"
+      />
 
       {/* Emergency banner */}
       <div className="bg-surface/80 border-y border-gold/10 px-6 py-5">
