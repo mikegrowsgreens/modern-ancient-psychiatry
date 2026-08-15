@@ -6,7 +6,7 @@ export default function Hero() {
       {/* Background image with Ken Burns */}
       <div className="absolute inset-0">
         <div
-          className="absolute inset-0 animate-ken-burns bg-cover bg-center"
+          className="absolute inset-0 bg-cover bg-center"
           style={{ backgroundImage: "url(/images/sunflower-hero.jpg)" }}
         />
         <div className="absolute inset-0 bg-deep/40" />

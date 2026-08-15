@@ -3,6 +3,42 @@
 @tailwind utilities;
 
 @layer base {
+  /*
+   * Single source of truth for design tokens. See DESIGN.md.
+   *
+   * Colors are space-separated CHANNEL TRIPLETS, never hex. Tailwind v3's
+   * <alpha-value> placeholder only composes against a triplet — a hex here
+   * silently flattens every `bg-gold/10` / `text-cream/85` in the codebase
+   * (~60 of them) to full opacity. The page doesn't error, it just goes loud.
+   */
+  :root {
+    /* Canvas */
+    --c-deep: 11 11 15;         /* #0B0B0F  page canvas, the only background   */
+    --c-surface: 26 26 30;      /* #1A1A1E  emergency strip ONLY               */
+
+    /* Ink */
+    --c-cream: 242 237 228;     /* #F2EDE4  primary text        16.8:1 on deep */
+    --c-muted: 168 159 143;     /* #A89F8F  secondary, labels    7.5:1 on deep */
+
+    /* Chroma — one hue, two densities (DESIGN.md §4) */
+    --c-gold: 201 168 76;       /* #C9A84C  INK AND LINE ONLY    8.6:1 on deep */
+    --c-gold-deep: 168 135 58;  /* #A8873A  FIELD ONLY    deep on it = 5.8:1   */
+
+    /* State */
+    --c-alert: 196 103 79;      /* #C4674F  form errors ONLY     5.1:1 on deep */
+
+    /* Layout */
+    --header-h: 5.5rem;         /* replaces a hardcoded top:"89px" magic number */
+
+    /* Motion — MOTION.md tokens */
+    --motion-micro: 140ms;
+    --motion-standard: 200ms;
+    --motion-modal: 260ms;
+    --motion-page: 300ms;
+    --ease-out: cubic-bezier(0, 0, 0.2, 1);
+    --ease-inout: cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
   html {
     scroll-behavior: smooth;
   }
@@ -18,6 +54,21 @@
   ::selection {
     @apply bg-gold/30 text-cream;
   }
+
+  /*
+   * One rule replaces five `focus:outline-none` sites and covers the two
+   * components that defined no focus style at all. Same hairline vocabulary as
+   * every rule on the site, so keyboard focus looks designed, not bolted on.
+   */
+  :focus-visible {
+    outline: 1px solid rgb(var(--c-gold));
+    outline-offset: 2px;
+  }
+
+  /* Numerals in ruled rows align on a column. */
+  .tabular {
+    font-variant-numeric: tabular-nums;
+  }
 }
 
 @layer components {
@@ -28,14 +79,32 @@
   .content-width {
     @apply max-w-4xl mx-auto;
   }
-
-  .gold-divider {
-    @apply w-16 h-px bg-gold/50 mx-auto;
-  }
 }
 
 @layer utilities {
   .text-balance {
     text-wrap: balance;
+  }
+
+  /* Structural seam on a dark canvas — reads as a seam, not a drawn line. */
+  .rule-seam {
+    border-color: rgb(var(--c-cream) / 0.12);
+  }
+}
+
+/*
+ * Global reduced-motion. Kills the hero entrance and smooth scrolling in one
+ * place; there was previously zero prefers-reduced-motion handling anywhere in
+ * the codebase despite a 25s infinite-alternate background animation.
+ */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
   }
 }

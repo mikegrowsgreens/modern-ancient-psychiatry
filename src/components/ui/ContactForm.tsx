@@ -33,7 +33,7 @@ export default function ContactForm() {
 
   if (status === "sent") {
     return (
-      <div className="bg-surface border border-sage/30 rounded-sm p-8 text-center">
+      <div className="bg-surface border border-gold/30 p-8">
         <p className="font-heading text-subheading text-gold mb-2">
           Thank you
         </p>
