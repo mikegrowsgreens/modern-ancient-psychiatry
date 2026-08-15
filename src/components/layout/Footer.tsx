@@ -8,93 +8,97 @@ import {
   FOOTER_LEGAL,
 } from "@/content/shared";
 
+/**
+ * `#E8C840` is gone; the field is `--gold-deep`. Ink is `--deep` at full
+ * strength throughout — the legal line was `text-deep/50` centered, which
+ * measured ~2.4:1 on gold and was the worst contrast on the site.
+ *
+ * The three-equal-column grid is gone too. A footer is not three peer columns:
+ * the logo and the tagline are the statement, the contact facts are an index,
+ * the nav is a single inline row, and the legal line is a footnote. The
+ * `brightness-0` logo silhouette is kept — printing the mark as solid ink on
+ * the stock is real craft, not a filter hack.
+ */
 export default function Footer() {
   return (
-    <footer className="bg-[#E8C840]">
-      <div className="max-w-6xl mx-auto px-6 py-16">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
-          {/* Logo + tagline */}
+    <footer className="border-t border-cream/[0.12] bg-deep px-6 py-rhythm-default md:px-12 lg:px-[4.5rem]">
+      <div className="mx-auto w-full max-w-index">
+        <div className="grid gap-14 lg:grid-cols-[2fr_1fr] lg:gap-20">
           <div>
             <Image
               src="/images/logo-trimmed-nobg.png"
               alt="Modern Ancient Psychiatry"
               width={400}
               height={209}
-              className="mb-4 h-16 w-auto brightness-0"
+              className="h-16 w-auto opacity-90"
             />
-            <p className="text-body-sm text-deep/70 italic font-heading">
+            <p className="mt-8 max-w-display font-heading text-verse font-light text-cream">
               {FOOTER_TAGLINE}
             </p>
-            <div className="flex gap-3 mt-4">
-              {SOCIAL_LINKS.map((link) => (
-                <a
-                  key={link.label}
-                  href={link.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={link.label}
-                  className="opacity-60 hover:opacity-100 transition-opacity"
-                >
-                  <Image
-                    src={link.icon}
-                    alt={link.label}
-                    width={24}
-                    height={24}
-                  />
-                </a>
-              ))}
-            </div>
-          </div>
 
-          {/* Navigation */}
-          <div>
-            <h4 className="font-heading text-deep text-body-sm mb-4 tracking-wide">
-              Pages
-            </h4>
-            <ul className="space-y-2">
-              {NAV_ITEMS.map((item) => (
-                <li key={item.href}>
-                  <Link
-                    href={item.href}
-                    className="text-body-sm text-deep/80 hover:text-deep transition-colors"
+            {/* SOCIAL_LINKS is empty by design (both entries were `href: "#"`).
+                Guarded so it renders nothing at all rather than an empty flex
+                container holding a stray 1rem of margin. */}
+            {SOCIAL_LINKS.length > 0 && (
+              <div className="mt-8 flex gap-4">
+                {SOCIAL_LINKS.map((link) => (
+                  <a
+                    key={link.label}
+                    href={link.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={link.label}
+                    className="opacity-70 transition-opacity duration-micro ease-out hover:opacity-100"
                   >
-                    {item.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
+                    <Image src={link.icon} alt="" width={24} height={24} />
+                  </a>
+                ))}
+              </div>
+            )}
           </div>
 
-          {/* Contact */}
-          <div>
-            <h4 className="font-heading text-deep text-body-sm mb-4 tracking-wide">
-              Contact
-            </h4>
-            <ul className="space-y-2 text-body-sm text-deep/80">
-              <li>
-                <a
-                  href={CONTACT.phoneHref}
-                  className="hover:text-deep transition-colors"
-                >
-                  {CONTACT.phone}
-                </a>
-              </li>
-              <li>
-                <a
-                  href={CONTACT.emailHref}
-                  className="hover:text-deep transition-colors break-all"
-                >
-                  {CONTACT.email}
-                </a>
-              </li>
-              <li className="text-deep/60">{CONTACT.location}</li>
-            </ul>
-          </div>
+          {/* Contact facts as a hairline-ruled index, not a labelled column. */}
+          <ul className="border-t border-deep/30">
+            <li className="border-b border-cream/[0.12] py-4">
+              <a
+                href={CONTACT.phoneHref}
+                className="lining-nums tabular-nums font-heading text-title text-cream underline-offset-[6px] hover:underline"
+              >
+                {CONTACT.phone}
+              </a>
+            </li>
+            <li className="border-b border-cream/[0.12] py-4">
+              <a
+                href={CONTACT.emailHref}
+                className="break-all font-body text-fine text-cream underline-offset-[6px] hover:underline"
+              >
+                {CONTACT.email}
+              </a>
+            </li>
+            <li className="border-b border-cream/[0.12] py-4 font-body text-label font-semibold uppercase text-muted">
+              {CONTACT.location}
+            </li>
+          </ul>
         </div>
 
-        <div className="mt-12 pt-6 border-t border-deep/20">
-          <p className="text-sm text-deep/50 text-center">{FOOTER_LEGAL}</p>
-        </div>
+        <nav aria-label="Footer" className="mt-14 border-t border-deep/30 pt-6">
+          <ul className="flex flex-wrap gap-x-10 gap-y-3">
+            {NAV_ITEMS.map((item) => (
+              <li key={item.href}>
+                <Link
+                  href={item.href}
+                  className="font-heading text-body text-cream underline-offset-[6px] hover:underline"
+                >
+                  {item.label}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </nav>
+
+        <p className="mt-10 max-w-display font-body text-fine leading-[1.6] text-muted">
+          {FOOTER_LEGAL}
+        </p>
       </div>
     </footer>
   );

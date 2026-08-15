@@ -40,7 +40,9 @@ export default function MobileBookingBar() {
     <div className="md:hidden fixed bottom-0 left-0 right-0 z-50 p-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] bg-deep/95 backdrop-blur-sm border-t border-gold/20">
       <Link
         href="/contact"
-        className="block w-full text-center bg-gold text-deep font-body font-semibold py-3 rounded-sm text-body-sm"
+        // Ghost outline, radius 0. A solid gold fill here made a third gold
+        // field on the page; gold-as-field is reserved for the one CTA block.
+        className="block w-full border border-gold py-3 text-center font-heading text-body-sm tracking-wide text-gold"
       >
         {BOOKING_CTA.cta}
       </Link>

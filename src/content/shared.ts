@@ -10,6 +10,21 @@ export const BOOK_CTA_LABEL = "Book a Consultation";
 export const EMERGENCY_DISCLAIMER =
   "If you are experiencing a mental health emergency, suicidal thoughts, or are in crisis, call 911, go to your nearest emergency room, or contact 988 immediately. Messages submitted through this website are not monitored 24/7.";
 
+/**
+ * The same sentence, split at the two numbers so they can be real `tel:` links.
+ * Wording is identical to EMERGENCY_DISCLAIMER above, verbatim — the split is a
+ * typesetting concern, not a copy change. The full string is kept because
+ * /contact renders it as one paragraph.
+ */
+export const EMERGENCY = {
+  lead: "If you are experiencing a mental health emergency, suicidal thoughts, or are in crisis, call",
+  emergency: { number: "911", href: "tel:911" },
+  middle: ", go to your nearest emergency room, or contact",
+  crisis: { number: "988", href: "tel:988" },
+  tail: "immediately.",
+  note: "Messages submitted through this website are not monitored 24/7.",
+} as const;
+
 export const CONTACT = {
   phone: "602-633-5917",
   phoneHref: "tel:+16026335917",

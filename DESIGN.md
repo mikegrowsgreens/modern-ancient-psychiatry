@@ -113,6 +113,31 @@ The FAQ and the contact form are therefore built from the **V–A–C Line Input
 
 ---
 
+## 2b. The direction bake-off — what was actually judged
+
+Three directions were built as working mocks at `/mocks/{a,b,c}` and rendered at 1440 before this document was finalized (`ui-design-system` Rule 2 — never ship generation 1). All three stayed inside the inherited black + gold + Cormorant identity; they differed in typography, atmosphere, and layout logic. Judged in the prescribed order: **typography and atmosphere first, then color, then layout.**
+
+| | Direction | Result |
+|---|---|---|
+| **A** | **Evening Program** | **Selected.** |
+| B | Nightwater — full-viewport photographic chapters, type floating in the image | Rejected |
+| C | Sutra — near-imageless, the whole page set as verse | Rejected, with one element promoted |
+
+**Why A won.**
+
+1. *Typography.* A was the only direction that established a real hierarchy: the monument at full display scale, flush-left, against a `--t-label` at `0.75rem`. B's hero type came in small and tentative to stay legible over photography; C's display line was elegant but its supporting text collapsed to near-illegible marginal glosses.
+2. *Atmosphere.* A is the only one that delivers the second promise — *someone prepared for me*. Ruled rows, hanging numerals, and a wall label under a plate read as care taken in advance. B delivers calm but not preparedness. C delivers reverence that tips into austerity, which reads as forbidding to a reader who is already frightened.
+3. *It holds facts.* The decisive test. A's services index carries four fees and four durations on a tabular column without a single box. B's prices float in a dark field with no structure to rank them. A card grid asks a dysregulated reader to comparison-shop; a ruled index asks nothing.
+4. *It degrades.* A's split composition has an obvious mobile form (plate above, ink panel below). B's full-bleed panels and C's wide margins are both fragile at 375.
+
+**Promoted from C:** the Metta treatment — the mantra set as four authored verse lines, indented without quote marks, with the final clause *rubricated in gold*. That is a real manuscript convention rather than an invented flourish, and it is stronger than treating the mantra as a pull quote. It becomes the About page's signature moment (§9).
+
+**Promoted from B:** *radial* scrims rather than rectangular ones for the one place type sits near photography (page heroes) — the type gets a near-solid field with no visible edge, which is what lets the page titles clear contrast without a visible box.
+
+**Rejected from both:** B's practice of setting body copy directly over busy photography, and C's near-total abandonment of the practitioner's own photographs.
+
+---
+
 ## 3. Why this is not AI slop
 
 Dark canvas + serif display + earth-toned accent is a known generated-design tell — the "calm editorial serif" and "dark mode by default" convergence that `avoid-ai-design` exists to catch. It is not a tell here, for one reason:

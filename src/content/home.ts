@@ -2,6 +2,12 @@ export const HERO = {
   title: "Modern Care\nwith Ancient Wisdom",
   subtitle: "Connecting you to your innate capacity to heal",
   tagline: "Honoring where you are, holding space for where you want to be",
+  // Wall label above the monument, and the plate's own label + alt. All three
+  // are FACTS (place, subject, year), never eyebrows — DESIGN.md §5.
+  label: "Virtual · Arizona residents only",
+  plateAlt:
+    "A bee on an orange desert wildflower in full bloom, photographed close",
+  plateLabel: "Wildflower and bee · Arizona 2025",
 } as const;
 
 // `*word*` renders as <em> via src/content/emphasis.tsx. Emphasis lives here,
@@ -22,9 +28,19 @@ export const PHILOSOPHY = [
 
 export const INTRO = {
   name: "Brittany Khoury PMHNP-BC",
+  // Wall label under the square plate \u2014 credentials and place, not a mood word.
+  credentials: "PMHNP-BC \u00b7 Arizona",
+  portraitAlt: "Brittany Khoury, PMHNP-BC, photographed outdoors in Arizona",
+  // Label on the ghost link out to /about. Matches the nav word exactly rather
+  // than inventing CTA microcopy (DESIGN.md \u00a712).
+  aboutLabel: "About",
+  // Sentence-per-entry. The home page sets the first two; /about carries the
+  // full narrative. Wording is untouched \u2014 only the array boundary moved, so
+  // the home card can hold exactly two sentences without splitting copy in JSX.
   bio: [
     "I\u2019m a board-certified Psychiatric Mental Health Nurse Practitioner with a heart for trauma healing, holistic wellness, and compassionate, human-centered care.",
-    "My work is rooted in the belief that true healing happens when we feel seen, heard, and supported. I bring a presence of non-judgment, curiosity, and deep listening into every therapeutic relationship.",
+    "My work is rooted in the belief that true healing happens when we feel seen, heard, and supported.",
+    "I bring a presence of non-judgment, curiosity, and deep listening into every therapeutic relationship.",
   ],
   continuation: [
     "In our work together, you can expect warmth, presence, and a safe space to explore the full spectrum of your experience\u2014",
@@ -43,6 +59,13 @@ export const WHY_DIFFERENT = {
   closing:
     "healing often begins when we feel safe enough to slow down, be honest, and fully human.",
 } as const;
+
+export const FAQ_HEADING = "Frequently asked questions";
+
+// Backdrop for the FAQ section. Alt describes the photograph; the section's
+// own heading carries the meaning, so it is decorative-but-described.
+export const FAQ_PLATE_ALT =
+  "Wheat heads against an open sky, photographed from below";
 
 export const FAQ = [
   {
@@ -84,13 +107,9 @@ export const FAQ = [
   },
 ] as const;
 
-export const VIDEO = {
-  // Set to a YouTube or Vimeo embed URL when ready, e.g.:
-  // url: "https://www.youtube.com/embed/VIDEO_ID"
-  url: null as string | null,
-  placeholderImage: "/images/IMG_4167.jpeg",
-  placeholderText: "Video coming soon",
-} as const;
+// VIDEO deleted with VideoSection.tsx. It shipped a "Video coming soon" card
+// over a still, and placeholder media is banned (DESIGN.md §9, §13). When a
+// real embed URL exists the section comes back as a plate with a wall label.
 
 export const BOOKING_CTA = {
   pretext:

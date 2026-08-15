@@ -1,44 +1,53 @@
 import Image from "next/image";
+import Button from "@/components/ui/Button";
 import { INTRO } from "@/content/home";
-import FadeIn from "@/components/ui/FadeIn";
 
+/**
+ * Differentiated from /about by role, not by decoration.
+ *
+ * This card used to duplicate the About page's composition AND its photograph
+ * (final-07.jpg) exactly, so scrolling from one to the other read as a bug. The
+ * circular gold-ringed portrait and the long narrative now belong to About
+ * alone (a circular crop is one of the four reserved circles — DESIGN.md §8).
+ * Here Brittany is a square plate with a wall label, two sentences, and a ghost
+ * link out. Introduction, not biography.
+ */
 export default function IntroCard() {
   return (
-    <section className="section-padding bg-surface">
-      <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-[280px_1fr] gap-12 items-start">
-        {/* Headshot */}
-        <FadeIn className="flex justify-center md:justify-start">
-          <div className="relative w-64 h-64 md:w-72 md:h-72 rounded-full overflow-hidden border-2 border-gold/20">
+    <section className="bg-deep px-6 py-rhythm-default md:px-12 lg:px-[4.5rem]">
+      <div className="mx-auto grid w-full max-w-index gap-10 md:grid-cols-[18rem_1fr] md:gap-16">
+        <figure className="m-0">
+          <div className="relative aspect-square w-full border border-cream/[0.12]">
             <Image
-              src="/images/final-07.jpg"
-              alt="Brittany Khoury, PMHNP-BC"
+              src="/images/final-20.jpg"
+              alt={INTRO.portraitAlt}
               fill
               className="object-cover object-top"
-              sizes="(max-width: 768px) 256px, 288px"
+              sizes="(max-width: 768px) 100vw, 18rem"
             />
           </div>
-        </FadeIn>
+          <figcaption className="mt-4 font-body text-label font-semibold uppercase text-muted">
+            {INTRO.credentials}
+          </figcaption>
+        </figure>
 
-        {/* Bio text */}
-        <FadeIn delay={200}>
-          <h2 className="font-heading text-heading md:text-display-sm text-gold mb-6">
+        <div>
+          <h2 className="max-w-display font-heading text-display font-light text-cream">
             {INTRO.name}
           </h2>
-          <div className="space-y-4">
-            {INTRO.bio.map((paragraph, i) => (
-              <p key={i} className="text-cream/85 leading-relaxed">
-                {paragraph}
+
+          <div className="mt-8 max-w-prose space-y-5">
+            {INTRO.bio.slice(0, 2).map((sentence) => (
+              <p key={sentence} className="font-body text-body leading-[1.7] text-cream/85">
+                {sentence}
               </p>
             ))}
           </div>
-          <div className="mt-8 pt-6 border-t border-gold/10 space-y-3">
-            {INTRO.continuation.map((line, i) => (
-              <p key={i} className="text-cream/85 leading-relaxed">
-                {line}
-              </p>
-            ))}
+
+          <div className="mt-10">
+            <Button href="/about">{INTRO.aboutLabel}</Button>
           </div>
-        </FadeIn>
+        </div>
       </div>
     </section>
   );

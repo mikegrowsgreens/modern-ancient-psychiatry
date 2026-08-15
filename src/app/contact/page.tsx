@@ -1,13 +1,30 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import { CONTACT, EMERGENCY_DISCLAIMER, SOCIAL_LINKS } from "@/content/shared";
-import { CONTACT_HEADING, CONTACT_INTRO } from "@/content/contact";
+import {
+  CONTACT_DETAILS_HEADING,
+  CONTACT_FACT_LABELS,
+  CONTACT_HEADING,
+  CONTACT_INTRO,
+  FORM_HEADING,
+} from "@/content/contact";
 import ContactForm from "@/components/ui/ContactForm";
 import PageHero from "@/components/layout/PageHero";
 
 export const metadata: Metadata = {
   title: "Contact",
 };
+
+const GUTTER = "px-6 md:px-12 lg:px-[4.5rem]";
+
+const ROW =
+  "rule-seam grid gap-y-2 border-b py-5 lg:grid-cols-[7rem_1fr] lg:items-baseline lg:gap-x-6";
+
+const KEY = "text-label uppercase text-muted";
+
+const VALUE = "font-heading text-title font-light text-cream";
+
+const VALUE_LINK = `${VALUE} transition-colors duration-micro ease-out hover:text-gold`;
 
 export default function ContactPage() {
   return (
@@ -18,90 +35,90 @@ export default function ContactPage() {
         height="sm"
       />
 
-      {/* Emergency banner */}
-      <div className="bg-surface/80 border-y border-gold/10 px-6 py-5">
-        <p className="text-sm text-muted/80 text-center max-w-3xl mx-auto leading-relaxed">
+      {/* The site's only --surface element: a different piece of stock from the
+          program. Never gold, never --alert — this is a standing fact, not a
+          warning about the website. DESIGN.md §10. */}
+      <div className={`${GUTTER} rule-seam border-y bg-surface py-rhythm-hairline`}>
+        <p className="mx-auto w-full max-w-index text-fine text-cream/85">
           {EMERGENCY_DISCLAIMER}
         </p>
       </div>
 
-      {/* Contact content */}
-      <section className="section-padding bg-deep">
-        <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-[320px_1fr] gap-16">
-          {/* Left: contact info */}
-          <div className="space-y-8">
-            <p className="text-cream/85 leading-relaxed font-heading text-body-lg italic">
+      <section className={`${GUTTER} pb-rhythm-open pt-rhythm-default`}>
+        <div className="mx-auto grid w-full max-w-index gap-y-16 lg:grid-cols-[1fr_1.4fr] lg:gap-x-20 lg:gap-y-0">
+          {/* Left: the facts, as a ruled index. Key hangs in the left margin,
+              value carries the weight. Phone and email are real links. */}
+          <div>
+            <h2 className="font-heading text-display font-light text-cream">
+              {CONTACT_DETAILS_HEADING}
+            </h2>
+
+            <p className="mt-8 max-w-prose font-heading text-verse font-light italic text-gold">
               {CONTACT_INTRO}
             </p>
 
-            <div className="space-y-4">
-              <div>
-                <h3 className="font-heading text-body text-gold mb-1">Call</h3>
-                <a
-                  href={CONTACT.phoneHref}
-                  className="text-cream/85 text-body-lg hover:text-gold transition-colors"
-                >
+            <div className="rule-seam mt-12 border-t">
+              <div className={ROW}>
+                <h3 className={KEY}>{CONTACT_FACT_LABELS.phone}</h3>
+                <a href={CONTACT.phoneHref} className={`tabular ${VALUE_LINK}`}>
                   {CONTACT.phone}
                 </a>
               </div>
 
-              <div>
-                <h3 className="font-heading text-body text-gold mb-1">
-                  Email
-                </h3>
+              <div className={ROW}>
+                <h3 className={KEY}>{CONTACT_FACT_LABELS.email}</h3>
                 <a
                   href={CONTACT.emailHref}
-                  className="text-cream/85 text-body-sm hover:text-gold transition-colors break-all"
+                  className={`break-words ${VALUE_LINK}`}
                 >
                   {CONTACT.email}
                 </a>
               </div>
 
-              <div>
-                <h3 className="font-heading text-body text-gold mb-1">
-                  Location
-                </h3>
-                <p className="text-muted">{CONTACT.location}</p>
+              <div className={ROW}>
+                <h3 className={KEY}>{CONTACT_FACT_LABELS.location}</h3>
+                <p className={VALUE}>{CONTACT.location}</p>
               </div>
 
-              <div>
-                <h3 className="font-heading text-body text-gold mb-1">
-                  Follow
-                </h3>
-                <div className="flex gap-4">
-                  {SOCIAL_LINKS.map((link) => (
-                    <a
-                      key={link.label}
-                      href={link.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      aria-label={link.label}
-                      className="opacity-70 hover:opacity-100 transition-opacity"
-                    >
-                      <Image
-                        src={link.icon}
-                        alt={link.label}
-                        width={28}
-                        height={28}
-                        className="invert"
-                      />
-                    </a>
-                  ))}
+              {/* SOCIAL_LINKS is empty by design — the practice has no social
+                  presence to link to. Guarded so an empty array renders no
+                  heading, no row, and no empty container. */}
+              {SOCIAL_LINKS.length > 0 ? (
+                <div className={ROW}>
+                  <h3 className={KEY}>{CONTACT_FACT_LABELS.follow}</h3>
+                  <div className="flex gap-5">
+                    {SOCIAL_LINKS.map((link) => (
+                      <a
+                        key={link.label}
+                        href={link.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label={link.label}
+                        className="opacity-70 transition-opacity duration-micro ease-out hover:opacity-100"
+                      >
+                        <Image
+                          src={link.icon}
+                          alt={link.label}
+                          width={24}
+                          height={24}
+                          className="invert"
+                        />
+                      </a>
+                    ))}
+                  </div>
                 </div>
-              </div>
+              ) : null}
             </div>
-
-            <p className="text-body-sm text-muted/60 italic mt-6">
-              Please do not include sensitive personal or medical information via email
-            </p>
           </div>
 
-          {/* Right: form */}
+          {/* Right: the form, on --measure-prose. */}
           <div>
-            <h2 className="font-heading text-heading text-cream mb-6">
-              Request a Consultation
+            <h2 className="font-heading text-display font-light text-cream">
+              {FORM_HEADING}
             </h2>
-            <ContactForm />
+            <div className="mt-10">
+              <ContactForm />
+            </div>
           </div>
         </div>
       </section>

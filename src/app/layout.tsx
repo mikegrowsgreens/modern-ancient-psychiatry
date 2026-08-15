@@ -1,4 +1,14 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
+import Script from "next/script";
+import {
+  SITE_URL,
+  SITE_NAME,
+  SITE_DESCRIPTION,
+  INDEXABLE,
+  GA4_ID,
+  SKIP_LINK_LABEL,
+} from "@/lib/site";
+import { jsonLd } from "@/lib/schema";
 import { Cormorant_Garamond, Source_Sans_3 } from "next/font/google";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
@@ -21,22 +31,44 @@ const sourceSans = Source_Sans_3({
 });
 
 export const metadata: Metadata = {
+  // Without metadataBase, Next warns at build and every OG/Twitter URL resolves
+  // relatively — which is why social shares of this site rendered blank.
+  metadataBase: new URL(SITE_URL),
   title: {
-    default: "Modern Ancient Psychiatry | Integrative Mental Health Care in Arizona",
-    template: "%s | Modern Ancient Psychiatry",
+    default: `${SITE_NAME} | Integrative Mental Health Care in Arizona`,
+    template: `%s | ${SITE_NAME}`,
   },
-  description:
-    "Integrative, trauma-informed psychiatric care for Arizona adults. Virtual appointments with Brittany Khoury, PMHNP-BC. Modern care with ancient wisdom.",
+  description: SITE_DESCRIPTION,
+  alternates: { canonical: "/" },
   icons: {
     icon: "/favicon.ico",
     apple: "/apple-touch-icon.png",
   },
   manifest: "/manifest.json",
+  robots: INDEXABLE
+    ? { index: true, follow: true }
+    : { index: false, follow: false },
   openGraph: {
     type: "website",
     locale: "en_US",
-    siteName: "Modern Ancient Psychiatry",
+    siteName: SITE_NAME,
+    title: `${SITE_NAME} | Integrative Mental Health Care in Arizona`,
+    description: SITE_DESCRIPTION,
+    url: SITE_URL,
+    images: [{ url: "/og.jpg", width: 1200, height: 630, alt: SITE_NAME }],
   },
+  twitter: {
+    card: "summary_large_image",
+    title: `${SITE_NAME} | Integrative Mental Health Care in Arizona`,
+    description: SITE_DESCRIPTION,
+    images: ["/og.jpg"],
+  },
+};
+
+// themeColor belongs in the viewport export in Next 14, not in metadata.
+export const viewport: Viewport = {
+  themeColor: "#0B0B0F",
+  colorScheme: "dark",
 };
 
 export default function RootLayout({
@@ -51,12 +83,29 @@ export default function RootLayout({
           href="#main-content"
           className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[100] focus:bg-gold focus:text-deep focus:px-4 focus:py-2 focus:rounded-sm focus:font-heading"
         >
-          Skip to Main Content
+          {SKIP_LINK_LABEL}
         </a>
         <Header />
-        <main id="main-content">{children}</main>
+        {/* tabIndex={-1} so the skip link actually moves focus, not just scroll. */}
+        <main id="main-content" tabIndex={-1}>
+          {children}
+        </main>
         <Footer />
         <MobileBookingBar />
+
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={jsonLd("home")}
+        />
+
+        <Script
+          src={`https://www.googletagmanager.com/gtag/js?id=${GA4_ID}`}
+          strategy="afterInteractive"
+        />
+        <Script id="ga4" strategy="afterInteractive">
+          {`window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}
+gtag('js',new Date());gtag('config','${GA4_ID}');`}
+        </Script>
       </body>
     </html>
   );

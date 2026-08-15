@@ -3,29 +3,35 @@ import Link from "next/link";
 type ButtonProps = {
   href: string;
   children: React.ReactNode;
-  variant?: "primary" | "outline" | "dark";
+  /**
+   * `ghost` is the default and is the only button shape on the `--deep` canvas:
+   * a solid button is an instruction, a ghost button is an offer (Aspelin
+   * borrow, DESIGN.md §10). `solid` exists for the single gold field, where the
+   * roles invert — solid `--deep` fill, `--gold-deep` ink, no border. That is
+   * the one solid button on the site.
+   */
+  variant?: "ghost" | "solid";
   className?: string;
 };
+
+// `transition-all` replaced with the named property that actually changes
+// (MOTION.md rule 7), and `rounded-sm` dropped — radius is 0 or fully round.
+const BASE =
+  "inline-block px-8 py-4 font-body text-label font-semibold uppercase transition-colors duration-micro ease-out";
+
+const VARIANTS = {
+  ghost: "border border-gold text-gold hover:bg-gold/10",
+  solid: "bg-deep text-gold-deep hover:text-cream",
+} as const;
 
 export default function Button({
   href,
   children,
-  variant = "primary",
+  variant = "ghost",
   className = "",
 }: ButtonProps) {
-  const base =
-    "inline-block px-8 py-3 text-body-sm font-body font-semibold tracking-wide transition-all duration-300 rounded-sm";
-  const variants = {
-    primary:
-      "bg-gold text-deep hover:bg-gold/90 hover:shadow-lg hover:shadow-gold/20",
-    outline:
-      "border border-gold/50 text-gold hover:bg-gold/10 hover:border-gold",
-    dark:
-      "bg-deep text-cream hover:bg-deep/80 hover:shadow-lg underline underline-offset-4 decoration-gold/50",
-  };
-
   return (
-    <Link href={href} className={`${base} ${variants[variant]} ${className}`}>
+    <Link href={href} className={`${BASE} ${VARIANTS[variant]} ${className}`}>
       {children}
     </Link>
   );
